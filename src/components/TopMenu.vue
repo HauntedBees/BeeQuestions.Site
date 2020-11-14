@@ -1,10 +1,10 @@
 <template>
     <v-app-bar app color="primary" dark flat>
-        <div class="hidden-sm-and-down">
+        <div>
             <div class="d-flex align-center">
                 <v-btn depressed text to="/">
                     <v-img alt="Bee Questions! Logo" class="shrink mr-2" contain :src="require('../assets/logo.png')" transition="scale-transition" width="40" />
-                    <h1>Bee Questions</h1>
+                    <h1 class="hidden-sm-and-down">Bee Questions</h1>
                 </v-btn>
             </div>
         </div>
