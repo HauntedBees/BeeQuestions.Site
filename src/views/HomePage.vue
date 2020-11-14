@@ -8,8 +8,8 @@
             <li v-for="tag in tags" :key="tag" class="mb-1">
               <Tag :tag="tag" />
             </li>
-            <li> <!-- TODO: browse tags logic -->
-              {{$t("browsetags")}}
+            <li class="subtitle-2">
+              <router-link to="/tags">{{$t("browsetags")}}</router-link>
             </li>
           </ul>
         </v-sheet>

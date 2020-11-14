@@ -1,3 +1,7 @@
+export class TagModel {
+    name = "";
+    count = 0;
+}
 export class AnswerModel {
     id = 0;
     url = "";

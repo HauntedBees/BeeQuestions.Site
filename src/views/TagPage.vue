@@ -9,7 +9,6 @@
                 </h2>
             </v-sheet>
             <v-sheet rounded="lg" min-height="70vh">
-            <div>
                 <TabList @switch-tab="SwitchTab" />
                 <Loader v-if="loading" />
                 <div v-if="!loading">
@@ -21,7 +20,6 @@
                         </i18n>
                     </div>
                 </div>
-            </div>
             </v-sheet>
         </v-col>
     </v-row>
@@ -46,8 +44,8 @@ export default class TagPage extends Loadable {
         }
         this.SwitchTab(0);
     }
-  async SwitchTab(tab:number) {
-    this.answers = await bee.getStandardValue(this, "TagAnswers", [this.tag, tab]);
-  }
+    async SwitchTab(tab:number) {
+        this.answers = await bee.getStandardValue(this, "TagAnswers", [this.tag, tab]);
+    }
 }
 </script>
