@@ -23,7 +23,7 @@
 </template>
 <script lang="ts">
 import { Vue, Component, Prop } from 'vue-property-decorator';
-import { bee, BeeResponse } from 'src/util/webmethod';
+import { bee } from 'src/util/webmethod';
 import { AnswerModel, QuestionModel } from 'src/models/AnswerModel';
 @Component
 export default class HomePage extends Vue {

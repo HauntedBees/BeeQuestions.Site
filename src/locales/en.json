@@ -23,7 +23,7 @@
   "tabpopular": "Popular",
   "tabrecent": "Recent",
   "tabneedslove": "Needs Love",
-  "tabclosed": "Closed",
+  "tabclosed": "Recently Closed",
 
   "changename": "Change Display Name",
   "cancel": "Cancel",
@@ -57,6 +57,28 @@
 
   "cancelbutton": "Cancel",
   "askbutton": "Ask",
+  "askbutton_loading": "Asking",
+
+  "remainingAnswers": "Answers Remaining Today",
+  "remainingQuestions": "Questions Remaining Today",
+  "bestQuestions": "Best Questions",
+  "totalAnswers": "Total Answers Given",
+  "totalQuestions": "Total Questions Asked",
+  "answersSaved": "Answers Saved",
+  "questionsLiked": "Questions Liked",
+  "p": "",
+
+  "loginInfo": "Login Info",
+  "neverShared": "(This information is never shared with anyone)",
+  "accountCreated": "Account Created",
+  "lastLogin": "Last Login",
+  "loginType": "Login Type",
+  "emailAddress": "Email Address",
+  "twitterAccount": "Twitter Account",
+  "changeEmail": "Change Email Address",
+  "changePassword": "Change Password",
+  "unlinkTwitter": "Unlink Twitter Account",
+  "deactivateAccount": "Deactivate Account",
 
   "numquestions": "No questions | 1 question | {n} questions",
   "numquestionspage": "No Questions Yet | 1 Question | {n} Questions",

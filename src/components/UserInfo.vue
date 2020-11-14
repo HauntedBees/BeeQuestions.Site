@@ -30,9 +30,12 @@
                 </v-row>
             </v-expansion-panel-header>
             <v-expansion-panel-content>
-                <v-row class="ml-3 my-2">
-                    <div class="text-caption"><strong>Questions Remaining:</strong> TODO</div>
-                    <div class="text-caption"><strong>Answers Remaining:</strong> TODO</div>
+                <v-row class="ml-3 my-2" v-if="$store.state.userInfo.blockdate !== null">
+                    <div class="text-caption"><strong>Posting Block for:</strong> {{$dayjs($store.state.userInfo.blockdate).fromNow(true)}}</div>
+                </v-row>
+                <v-row class="ml-3 my-2" v-if="$store.state.userInfo.blockdate === null">
+                    <div class="text-caption"><strong>{{$t("remainingQuestions")}}:</strong> {{$store.state.userInfo.questionsPerDay - $store.state.userInfo.questionsAsked}}</div>
+                    <div class="text-caption"><strong>{{$t("remainingAnswers")}}:</strong> {{$store.state.userInfo.answersPerDay - $store.state.userInfo.answersGiven}}</div>
                 </v-row>
                 <v-divider />
                 <v-row class="ml-3 my-2">

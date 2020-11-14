@@ -6,15 +6,17 @@ import vuetify from './plugins/vuetify';
 import i18n from './i18n';
 import dayjs from 'dayjs';
 import relativeTime from 'dayjs/plugin/relativeTime';
+import localizedFormat from 'dayjs/plugin/localizedFormat';
 import "src/components/components.module";
 
 dayjs.extend(relativeTime);
+dayjs.extend(localizedFormat);
 Object.defineProperty(Vue.prototype, "$dayjs", { value: dayjs });
-/*Object.defineProperty(Vue.prototype, "$filters", { value: {
-  funcoNum(x:number) {
-    return x+1;
+Object.defineProperty(Vue.prototype, "$filters", { value: {
+  titlecase(str:string) {
+    return str.split(" ").map(w => w[0].toLocaleUpperCase() + w.slice(1)).join(" ");
   }
-} });*/
+} });
 Vue.config.productionTip = false;
 new Vue({
   router,
