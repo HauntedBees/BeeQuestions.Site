@@ -1,7 +1,7 @@
 # BeeQuestions.Site
 
 ## wut
-The frontend for Bee Questions! - the world's first A&Q website
+The frontend for Bee Questions! - the world's first A&Q website. Check out the [backend](https://github.com/HauntedBees/BeeQuestions.API/), too!
 
 ## dependencies
 Bee Questions! is built with [Vue.js](https://vuejs.org/), [Vuetify](https://vuetifyjs.com/en/), [Vue I18n](https://kazupon.github.io/vue-i18n/), [vuex-persistedstate](https://www.npmjs.com/package/vuex-persistedstate), [core-js](https://www.npmjs.com/package/core-js), and [Day.js](https://day.js.org/), which are all licensed under the MIT License.
