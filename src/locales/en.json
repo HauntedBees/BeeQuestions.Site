@@ -7,6 +7,13 @@
   "signup_please": "Please enter your email address and password",
   "welcomemessage": "Thank you for joining Bee Questions! We hope you enjoy your stay! Be sure to read the rules and have fun!",
 
+  "lblemail": "Email Address",
+  "lblpassword": "Password",
+  "lblconfirmpassword": "Confirm Password",
+  "plzemail": "Please enter your email address.",
+  "plzpassword": "Please enter your password.",
+  "plzpasswordmatch": "Passwords must match.",
+
   "settings": "Profile",
   "logout": "Log Out",
 
@@ -66,7 +73,6 @@
   "totalQuestions": "Total Questions Asked",
   "answersSaved": "Answers Saved",
   "questionsLiked": "Questions Liked",
-  "p": "",
 
   "loginInfo": "Login Info",
   "neverShared": "(This information is never shared with anyone)",
@@ -79,6 +85,11 @@
   "changePassword": "Change Password",
   "unlinkTwitter": "Unlink Twitter Account",
   "deactivateAccount": "Deactivate Account",
+
+  "changePasswordText": "Hopefully you aren't storing your credit card information on this site, but you should have up-to-date and secure passwords everywhere, even on silly sites like this one!",
+  "oldPassword": "Old Password",
+  "newPassword": "New Password",
+  "confirmNewPassword": "Confirm New Password",
 
   "numquestions": "No questions | 1 question | {n} questions",
   "numquestionspage": "No Questions Yet | 1 Question | {n} Questions",

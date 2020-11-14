@@ -17,22 +17,22 @@
                     </div>
                 </div>
                 <v-form ref="form" v-model="valid" style="width: 50%; min-width: 300px" class="mx-auto py-4">
-                    <v-text-field v-model="username" :rules="namerules" label="Email Address" required />
+                    <v-text-field v-model="username" :rules="namerules" :label="$t('lblemail')" required />
                     <v-text-field 
                         v-model="password"
                         :append-icon="showPassword?'mdi-eye':'mdi-eye-off'"
                         :type="showPassword?'text':'password'"
                         @click:append="showPassword=!showPassword"
                         :rules="passwordrules"
-                        label="Password"
+                        :label="$t('lblpassword')"
                         required />
                     <v-text-field 
                         v-model="confirmpassword"
                         :append-icon="showPassword?'mdi-eye':'mdi-eye-off'"
                         :type="showPassword?'text':'password'"
                         @click:append="showPassword=!showPassword"
-                        :rules="[v => v === password || 'Passwords must match.']"
-                        label="Confirm Password"
+                        :rules="[v => v === password || $t('plzpasswordmatch') ]"
+                        :label="$t('lblconfirmpassword')"
                         required />
                     <v-container>
                         <v-row>
@@ -63,9 +63,9 @@ export default class SignUpPage extends Loadable {
     valid = true;
     username = "";
     showPassword = false;
-    namerules = [ (v:string) => !!v || "Please enter your email address." ];
+    namerules = [ (v:string) => !!v || this.$t("plzemail") ];
     password = "";
-    passwordrules = [ (v:string) => !!v || "Please enter your password." ];
+    passwordrules = [ (v:string) => !!v || this.$t("plzpassword") ];
     confirmpassword = "";
     validate() { this.valid = (this.$refs.form as Vue & { validate: () => boolean }).validate(); }
     register(btn:Loadable) {

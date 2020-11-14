@@ -2,7 +2,7 @@
 <v-container>
     <v-row>
         <v-col cols="12" sm="2" class="hidden-sm-and-down" />
-        <v-col cols="12" sm="8">
+        <v-col v-if="$store.state.auth" cols="12" sm="8">
             <v-sheet class="mb-4 pa-2 px-4 text-center">
                 <v-row v-if="editingEmoji===''">
                     <v-hover v-slot="{hover}">
@@ -80,7 +80,49 @@
                         <div class="mx-auto">
                             <!--<v-btn v-if="$store.state.userInfo.source==='twitter'" class="mb-2" color="accent">{{$t("unlinkTwitter")}}</v-btn>
                             <v-btn v-if="$store.state.userInfo.source==='email'" class="mb-2" color="accent">{{$t("changeEmail")}}</v-btn>-->
-                            <v-btn v-if="$store.state.userInfo.source==='email'" class="mb-2" color="accent">{{$t("changePassword")}}</v-btn>
+                            <v-dialog v-if="$store.state.userInfo.source==='email'" v-model="showPasswordDialog" width="500">
+                                <template v-slot:activator="{ on, attrs }">
+                                    <v-btn v-bind="attrs" v-on="on" class="mb-2" color="accent">{{$t("changePassword")}}</v-btn>
+                                </template>
+                                <v-card style="border: 1px solid white">
+                                    <v-card-title>{{$t("changePassword")}}</v-card-title>
+                                    <v-card-text>
+                                        <p>{{$t("changePasswordText")}}</p>
+                                        <v-form ref="formPassword">
+                                            <v-text-field 
+                                                v-model="oldPassword"
+                                                :append-icon="showPassword?'mdi-eye':'mdi-eye-off'"
+                                                :type="showPassword?'text':'password'"
+                                                @click:append="showPassword=!showPassword"
+                                                :rules="passwordrules"
+                                                :label="$t('oldPassword')"
+                                                required />
+                                            <v-text-field 
+                                                v-model="newPassword"
+                                                :append-icon="showPassword?'mdi-eye':'mdi-eye-off'"
+                                                :type="showPassword?'text':'password'"
+                                                @click:append="showPassword=!showPassword"
+                                                :rules="passwordrules"
+                                                :label="$t('newPassword')"
+                                                required />
+                                            <v-text-field 
+                                                v-model="confirmNewPassword"
+                                                :append-icon="showPassword?'mdi-eye':'mdi-eye-off'"
+                                                :type="showPassword?'text':'password'"
+                                                @click:append="showPassword=!showPassword"
+                                                :rules="[v => v === newPassword || $t('plzpasswordmatch') ]"
+                                                :label="$t('confirmNewPassword')"
+                                                required />
+                                        </v-form>
+                                    </v-card-text>
+                                    <v-divider/>
+                                    <v-card-actions>
+                                        <v-spacer/>
+                                        <v-btn color="secondary" class="mr-4" @click="showPasswordDialog=false">{{$t("cancel")}}</v-btn>
+                                        <LoadableButton color="accent" textkey="save" :valid="true" @submit="SavePasswordChange"/>
+                                    </v-card-actions>
+                                </v-card>
+                            </v-dialog>
                             <v-btn class="mb-2" color="secondary">{{$t("deactivateAccount")}}</v-btn>
                         </div>
                     </v-sheet>
@@ -127,6 +169,22 @@ export default class SettingsPage extends Vue {
         bee.post(btn, "DisplayName", trimmedName, () => {
             this.$store.commit("changename", trimmedName);
             this.editDisplayName = false;
+        });
+    }
+
+    oldPassword = "";
+    newPassword = "";
+    confirmNewPassword = "";
+    passwordrules = [ (v:string) => !!v || this.$t("plzpassword") ];
+    showPassword = false;
+    showPasswordDialog = false;
+    validPassword = true;
+    validatePassword() { this.validPassword = (this.$refs.formPassword as Vue & { validate: () => boolean }).validate(); }
+    SavePasswordChange(btn:Loadable) {
+        this.validatePassword();
+        if(!this.validPassword) { return; }
+        bee.post(btn, "PasswordChange", { oldPassword: this.oldPassword, newPassword: this.newPassword }, () => {
+            this.showPasswordDialog = false;
         });
     }
 }
