@@ -18,7 +18,9 @@
                 <div class="pa-2" v-if="$store.state.auth">
                     <LoadableTooltipIconButton color="error" icon="flag" textkey="flaganswer" />
                     <div class="float-right">
-                        <LoadableTooltipIconButton color="primary" icon="bookmark-plus" textkey="savebookmark" />
+                        <LoadableTooltipIconButton color="primary" @submit="BookmarkAnswer" 
+                            :icon="(answer && answer.liked) ? 'bookmark-minus' : 'bookmark-plus'"
+                            :textkey="(answer && answer.liked) ? 'unsavebookmark' : 'savebookmark'" />
                         <v-btn color="primary" class="ml-5" @click="isAsking=true"><v-icon>mdi-comment-question</v-icon> Question</v-btn>
                     </div>
                 </div>
@@ -71,6 +73,7 @@ export default class AnswerPage extends Vue {
     isAsking = false;
     myQuestion = "";
     answerid = "";
+    alreadyLiked = false;
     answer:FullAnswerModel|null = null;
     sort = 0;
     created() {
@@ -85,6 +88,12 @@ export default class AnswerPage extends Vue {
             this.isAsking = this.answer.questions.length === 0;
             this.SortQuestions(0);
             document.title = `Bee Questions! - "${this.answer.answer}"`;
+        });
+    }
+    BookmarkAnswer(btn:Loadable) {
+        bee.post(btn, "AnswerLikeToggle", this.answerid, (data:BeeResponse<boolean>) => {
+            if(this.answer === null) { return; }
+            this.answer.liked = data.result;
         });
     }
     PostQuestion(btn:Loadable) {

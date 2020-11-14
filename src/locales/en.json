@@ -25,7 +25,8 @@
   "tabneedslove": "Needs Love",
   "tabclosed": "Closed",
 
-  "savebookmark": "Save Answer",
+  "savebookmark": "Bookmark Answer",
+  "unsavebookmark": "Remove Bookmark",
   "flaganswer": "Flag Answer",
   "votingends": "Voting ends in {0}",
 

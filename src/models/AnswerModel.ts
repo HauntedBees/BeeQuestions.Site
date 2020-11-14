@@ -25,6 +25,7 @@ export class FullAnswerModel {
     status = "";
     opened = "";
     closed = "";
+    liked = false;
     tags:string[] = [];
     questions:QuestionModel[] = [];
 }
