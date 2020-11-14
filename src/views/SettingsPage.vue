@@ -63,7 +63,7 @@
                                 <strong>{{$t("emailAddress")}}: </strong> {{$store.state.userInfo.sourcename}}
                             </div>
                             <div class="mb-1" v-if="$store.state.userInfo.source==='twitter'">
-                                <strong>{{$t("twitterAccount")}}: </strong> {{$store.state.userInfo.sourcename}}
+                                <strong>{{$t("twitterAccount")}}: </strong> <ax :href="'https://www.twitter.com/' + $store.state.userInfo.sourcename">@{{$store.state.userInfo.sourcename}}</ax>
                             </div>
                         </div>
                         <div class="mx-auto">
