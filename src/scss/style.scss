@@ -1,0 +1,13 @@
+@font-face { font-family: "Nevis"; src: url("../fonts/nevis2.ttf") }
+em { font-family: "Nevis"; font-style: normal; font-size: 1.3rem; }
+@for $i from 1 through 6 {
+    h#{$i} { font-family: "Nevis" }
+}
+ul {
+    list-style-type: none;
+    padding-top: 6px;
+    padding-left: 6px !important;
+}
+.v-slide-group__prev { display: none!important }
+p { text-indent: 2em }
+p.text-sm-body-2 { text-indent: 1em }

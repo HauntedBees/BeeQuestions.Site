@@ -1,0 +1,49 @@
+{
+  "login": "Log In",
+  "login_loading": "Logging In",
+  "signup": "Sign Up",
+  "login_please": "Please enter your email address and password",
+  "signup_loading": "Signing Up",
+  "signup_please": "Please enter your email address and password",
+  "welcomemessage": "Thank you for joining Bee Questions! We hope you enjoy your stay! Be sure to read the rules and have fun!",
+
+  "settings": "Profile",
+  "logout": "Log Out",
+
+  "oauthredirect": "Please wait one moment while you are redirected back to the site.",
+  "oauthdenied": "Changed your mind? No worries!",
+
+  "populartags": "Popular Tags",
+  "browsetags": "Browse Tags",
+  "taganswers": "{0} Answers",
+
+  "notag": "There are no {0} Answers. Maybe you should {1}.",
+  "notaglink": "answer one",
+
+  "tabpopular": "Popular",
+  "tabrecent": "Recent",
+  "tabneedslove": "Needs Love",
+  "tabclosed": "Closed",
+
+  "savebookmark": "Save Answer",
+  "flaganswer": "Flag Answer",
+  "votingends": "Voting ends in {0}",
+
+  "flagquestion": "Flag Question",
+  "votequestion": "Vote for Question",
+  "unvotequestion": "Unvote for Question",
+  "yourquestion": "you asked this",
+
+  "noquestion": "There are no Questions for this Answer... yet. Maybe you should {0}.",
+  "noquestionlink": "ask one",
+  "askquestion": "Ask a Question!",
+  "askquestiondesc": "First time asking? Try to come up with a Question that could be answered by the Answer above this!",
+  "askquestiontextarea": "Type your question here",
+
+  "cancelbutton": "Cancel",
+  "askbutton": "Ask",
+
+  "numquestions": "No questions | 1 question | {n} questions",
+  "numquestionspage": "No Questions Yet | 1 Question | {n} Questions",
+  "loginpage": "Log in with your {0}, or with a third-party authentication method! Or, if you'd like to create your own {0}, click the \"Sign Up\" button below!"
+}
