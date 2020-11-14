@@ -11,6 +11,9 @@ export class AnswerModel {
 }
 export class QuestionModel {
     id = 0;
+    answer = "";
+    answerURL = "";
+    winner = false;
     author = "";
     question = "";
     posted = "";

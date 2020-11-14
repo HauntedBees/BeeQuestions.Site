@@ -25,6 +25,14 @@
   "tabneedslove": "Needs Love",
   "tabclosed": "Closed",
 
+  "mynotifications": "Notifications",
+  "myuseranswers": "My Answers",
+  "useranswers": "Answers",
+  "myuserquestions": "My Questions",
+  "userquestions": "Questions",
+  "useranswerlikes": "Saved Answers",
+  "usequestionlikes": "Saved Questions",
+
   "savebookmark": "Bookmark Answer",
   "unsavebookmark": "Remove Bookmark",
   "flaganswer": "Flag Answer",

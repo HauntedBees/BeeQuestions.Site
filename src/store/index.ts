@@ -32,6 +32,7 @@ export default new Vuex.Store({
       state.auth = true;
     },
     logout(state) {
+      state.userInfo = new UserInfoModel();
       state.auth = false;
       state.token = "";
       window.location.reload();

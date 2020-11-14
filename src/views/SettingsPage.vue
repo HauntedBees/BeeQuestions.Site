@@ -51,7 +51,8 @@
                     </v-sheet>
                 </v-col>
                 <v-col cols="12" sm="8">
-                    <v-sheet class="mb-4 pa-2 px-4 text-center">
+                    <v-sheet>
+                        <UserActivity :name="$store.state.userInfo.displayname" :isLoggedInUser="true" />
                     </v-sheet>
                 </v-col>
             </v-row>
