@@ -9,6 +9,8 @@ import LoadableTooltipIconButton from "src/components/LoadableTooltipIconButton.
 import Loader from "src/components/Loader.vue";
 import TabList from "src/components/TabList.vue";
 import Tag from "src/components/Tag.vue";
+import TwemojiSelector from "src/components/TwemojiSelector.vue";
+import TwemojiVue from "src/components/TwemojiVue.vue";
 import TopMenu from "src/components/TopMenu.vue";
 import UserActivity from "src/components/UserActivity.vue";
 import UserInfo from "src/components/UserInfo.vue";
@@ -23,5 +25,7 @@ Vue.component("Loader", Loader);
 Vue.component("TabList", TabList);
 Vue.component("Tag", Tag);
 Vue.component("TopMenu", TopMenu);
+Vue.component("TwemojiSelector", TwemojiSelector);
+Vue.component("emoji", TwemojiVue);
 Vue.component("UserActivity", UserActivity);
 Vue.component("UserInfo", UserInfo);

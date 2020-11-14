@@ -16,7 +16,7 @@
             <v-expansion-panel-header class="ma-0 pa-0" :hide-actions="hideExpandIcon" :disabled="hideExpandIcon">
                 <v-row>
                     <v-col cols="3">
-                        <v-avatar size="48" color="indigo"><span class="white--text">CH</span></v-avatar>
+                        <v-avatar size="48" color="indigo"><emoji class="pt-1" :emoji="$store.state.userInfo.emoji"/></v-avatar>
                     </v-col>
                     <v-col cols="9">
                         <div>

@@ -11,3 +11,10 @@ ul {
 .v-slide-group__prev { display: none!important }
 p { text-indent: 2em }
 p.text-sm-body-2 { text-indent: 1em }
+
+.on-hover { opacity: 0.8; cursor: pointer }
+
+$sizes: 16px, 32px, 48px, 64px, 76px;
+@each $size in $sizes {
+    .e-size#{$size} img { width: $size !important; height: $size !important }
+}

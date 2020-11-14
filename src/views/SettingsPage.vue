@@ -4,8 +4,19 @@
         <v-col cols="12" sm="2" class="hidden-sm-and-down" />
         <v-col cols="12" sm="8">
             <v-sheet class="mb-4 pa-2 px-4 text-center">
-                <v-row>
-                    <v-avatar class="mx-auto" size="48" color="indigo"><span class="white--text">CH</span></v-avatar>
+                <v-row v-if="editingEmoji===''">
+                    <v-hover v-slot="{hover}">
+                        <v-avatar :class="{ 'mx-auto': true, 'on-hover': hover }" size="48" color="indigo">
+                            <emoji class="pt-1" :emoji="$store.state.userInfo.emoji"/>
+                            <v-icon v-if="hover" @click="EditProfileEmoji" style="position:absolute;top:0;left:0">mdi-pencil</v-icon>
+                        </v-avatar>
+                    </v-hover>
+                </v-row>
+                <v-row v-if="editingEmoji!==''">
+                    <v-avatar class="mx-auto" size="48" color="indigo">
+                        <emoji class="pt-1" :emoji="$store.state.userInfo.emoji"/>
+                    </v-avatar>
+                    <TwemojiSelector />
                 </v-row>
                 <v-row class="mt-2">
                     <div class="mx-auto">
@@ -70,8 +81,8 @@
                             </div>
                         </div>
                         <div class="mx-auto">
-                            <!--<v-btn v-if="$store.state.userInfo.source==='twitter'" class="mb-2" color="accent">{{$t("unlinkTwitter")}}</v-btn>-->
-                            <v-btn v-if="$store.state.userInfo.source==='email'" class="mb-2" color="accent">{{$t("changeEmail")}}</v-btn>
+                            <!--<v-btn v-if="$store.state.userInfo.source==='twitter'" class="mb-2" color="accent">{{$t("unlinkTwitter")}}</v-btn>
+                            <v-btn v-if="$store.state.userInfo.source==='email'" class="mb-2" color="accent">{{$t("changeEmail")}}</v-btn>-->
                             <v-btn v-if="$store.state.userInfo.source==='email'" class="mb-2" color="accent">{{$t("changePassword")}}</v-btn>
                             <v-btn class="mb-2" color="secondary">{{$t("deactivateAccount")}}</v-btn>
                         </div>
@@ -93,6 +104,7 @@ import { Loadable } from 'src/util/Loadable';
 export default class SettingsPage extends Vue {
     displayname = "";
     editDisplayName = false;
+    editingEmoji = "";
     additionalInfo:object|null = null;
     created() {
         if(!this.$store.state.auth) {
@@ -102,6 +114,9 @@ export default class SettingsPage extends Vue {
         bee.get(null, "AdditionalUserInfo", [], (data:BeeResponse<object>) => {
             this.additionalInfo = data.result;
         });
+    }
+    EditProfileEmoji() {
+        this.editingEmoji = this.$store.state.userInfo.emoji;
     }
     ChangeName(btn:Loadable) {
         const trimmedName = this.displayname.trim();

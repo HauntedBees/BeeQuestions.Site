@@ -6,7 +6,7 @@
             <Loader v-if="loading" />
             <v-sheet v-if="userInfo !== null" class="mb-4 pa-2 px-4 text-center">
                 <v-row>
-                    <v-avatar class="mx-auto" size="48" color="indigo"><span class="white--text">CH</span></v-avatar>
+                    <v-avatar class="mx-auto" size="48" color="indigo"><emoji class="pt-1" :emoji="userInfo.emoji"/></v-avatar>
                 </v-row>
                 <v-row class="mt-2">
                     <div class="mx-auto">

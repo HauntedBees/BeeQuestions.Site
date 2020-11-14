@@ -2,6 +2,7 @@ export class UserInfoModel {
     displayname = "";
     joined = "";
     lastlogin = "";
+    emoji = "1F41D";
     blockdate:string|null = null;
     score = 0;
     level = 0;
