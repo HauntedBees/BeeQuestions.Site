@@ -3,6 +3,7 @@ export class UserInfoModel {
     joined = "";
     lastlogin = "";
     emoji = "1F41D";
+    color = "#4B0082";
     blockdate:string|null = null;
     score = 0;
     level = 0;

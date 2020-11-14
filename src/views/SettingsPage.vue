@@ -6,22 +6,19 @@
             <v-sheet class="mb-4 pa-2 px-4 text-center">
                 <v-row v-if="editingEmoji===''">
                     <v-hover v-slot="{hover}">
-                        <v-avatar :class="{ 'mx-auto': true, 'on-hover': hover }" size="48" color="indigo">
+                        <v-avatar @click="EditProfileEmoji" :class="{ 'mx-auto': true, 'on-hover': hover }" size="48" :color="$store.state.userInfo.color">
                             <emoji class="pt-1" :emoji="$store.state.userInfo.emoji"/>
-                            <v-icon v-if="hover" @click="EditProfileEmoji" style="position:absolute;top:0;left:0">mdi-pencil</v-icon>
+                            <v-icon v-if="hover" style="position:absolute;top:0;left:0">mdi-pencil</v-icon>
                         </v-avatar>
                     </v-hover>
                 </v-row>
                 <v-row v-if="editingEmoji!==''">
-                    <v-avatar class="mx-auto" size="48" color="indigo">
-                        <emoji class="pt-1" :emoji="$store.state.userInfo.emoji"/>
-                    </v-avatar>
-                    <TwemojiSelector />
+                    <TwemojiSelector :color="editingColor" :emoji="editingEmoji" @finish="EndProfileEmoji" />
                 </v-row>
                 <v-row class="mt-2">
                     <div class="mx-auto">
                         <div class="pb-3" v-if="editDisplayName">
-                            <v-text-field v-model="displayname" :label="$t('newdisplayname')"></v-text-field>
+                            <v-text-field v-model="displayname" maxlength="20" counter="20" :label="$t('newdisplayname')"></v-text-field>
                             <div>
                                 <v-btn color="secondary" class="mr-4" @click="editDisplayName=false">{{$t("cancel")}}</v-btn>
                                 <LoadableButton color="accent" textkey="save" :valid="true" @submit="ChangeName"/>
@@ -104,6 +101,7 @@ import { Loadable } from 'src/util/Loadable';
 export default class SettingsPage extends Vue {
     displayname = "";
     editDisplayName = false;
+    editingColor = "";
     editingEmoji = "";
     additionalInfo:object|null = null;
     created() {
@@ -116,8 +114,10 @@ export default class SettingsPage extends Vue {
         });
     }
     EditProfileEmoji() {
+        this.editingColor = this.$store.state.userInfo.color;
         this.editingEmoji = this.$store.state.userInfo.emoji;
     }
+    EndProfileEmoji() { this.editingEmoji = ""; }
     ChangeName(btn:Loadable) {
         const trimmedName = this.displayname.trim();
         if(trimmedName === "" || trimmedName === this.$store.state.userInfo.displayname) {

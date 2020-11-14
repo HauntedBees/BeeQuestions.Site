@@ -28,6 +28,10 @@ export default new Vuex.Store({
     changename(state, newname:string) {
       state.userInfo.displayname = newname;
     },
+    changeavatar(state, avatarInfo:string[]) {
+      state.userInfo.emoji = avatarInfo[0];
+      state.userInfo.color = avatarInfo[1];
+    },
     login(state, userInfo:LoginResponseModel) {
       state.userInfo = userInfo.user;
       state.token = userInfo.token;
