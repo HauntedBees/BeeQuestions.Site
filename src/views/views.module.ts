@@ -1,5 +1,6 @@
 import Vue from "vue";
 import VueRouter, { RouteConfig } from "vue-router";
+import AdminPage from "src/views/AdminPage.vue";
 import HomePage from "src/views/HomePage.vue";
 import LoginPage from "src/views/LoginPage.vue";
 import SignUpPage from "src/views/SignUpPage.vue";
@@ -16,6 +17,7 @@ import OAuthPage from "src/views/OAuthPage.vue";
 Vue.use(VueRouter);
 const routes:Array<RouteConfig> = [
     { path: "/", component: HomePage, meta: { title: "Bee Questions!" } },
+    { path: "/admin", component: AdminPage, meta: { title: "Bee Questions! - Admin Section" } },
 
     { path: "/login", component: LoginPage, meta: { title: "Bee Questions! - Log In" } },
     { path: "/signup", component: SignUpPage, meta: { title: "Bee Questions! - Create an Account" } },
