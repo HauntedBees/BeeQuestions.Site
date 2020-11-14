@@ -9,6 +9,7 @@ import SettingsPage from "src/views/SettingsPage.vue";
 import RulesPage from "src/views/RulesPage.vue";
 import AnswerPage from "src/views/AnswerPage.vue";
 import TagPage from "src/views/TagPage.vue";
+import UserPage from "src/views/UserPage.vue";
 import BrowseTagsPage from "src/views/BrowseTagsPage.vue";
 import OAuthPage from "src/views/OAuthPage.vue";
 
@@ -25,6 +26,7 @@ const routes:Array<RouteConfig> = [
     { path: "/rules", component: RulesPage, meta: { title: "Bee Questions! - Rules" } },
     { path: "/privacypolicy", component: PrivacyPolicyPage, meta: { title: "Bee Questions! - Privacy Policy" } },
 
+    { path: "/user/:id", component: UserPage },
     { path: "/answer/:id", component: AnswerPage },
     { path: "/tags", component: BrowseTagsPage },
     { path: "/tag/:tag", component: TagPage }

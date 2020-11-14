@@ -36,3 +36,13 @@ export class FullAnswerModel {
     tags:string[] = [];
     questions:QuestionModel[] = [];
 }
+export class UserProfileModel {
+    displayname = "";
+    level = 0;
+    score = 0;
+    answers = 0;
+    questions = 0;
+    answerLikes = 0;
+    questionLikes = 0;
+    bestQuestions = 0;
+}

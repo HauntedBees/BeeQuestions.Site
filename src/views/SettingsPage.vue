@@ -33,7 +33,10 @@
                     <v-row class="mt-2">
                         <v-col cols="12" sm="4" class="text-caption pb-0 pt-1"><strong>{{$t("remainingAnswers")}}:</strong> {{$store.state.userInfo.answersPerDay - $store.state.userInfo.answersGiven}}</v-col>
                         <v-col cols="12" sm="4" class="text-caption pb-0 pt-1"><strong>{{$t("remainingQuestions")}}:</strong> {{$store.state.userInfo.questionsPerDay - $store.state.userInfo.questionsAsked}}</v-col>
-                        <v-col cols="12" sm="4" class="text-caption pb-0 pt-1" v-if="additionalInfo !== null"><strong>{{$t("bestQuestions")}}:</strong> {{additionalInfo.bestQuestions}}</v-col>
+                        <v-col cols="12" sm="4" class="text-caption pb-0 pt-1" v-if="additionalInfo !== null">
+                            <strong>{{$t("bestQuestions")}}:</strong>
+                            {{additionalInfo.bestQuestions}} ({{$filters.percent(additionalInfo.bestQuestions / additionalInfo.questions)}})
+                        </v-col>
                     </v-row>
                     <v-row v-if="additionalInfo !== null">
                         <v-col cols="12" sm="3" class="text-caption pb-0 pt-1"><strong>{{$t("totalAnswers")}}:</strong> {{additionalInfo.answers}}</v-col>
@@ -92,6 +95,10 @@ export default class SettingsPage extends Vue {
     editDisplayName = false;
     additionalInfo:object|null = null;
     created() {
+        if(!this.$store.state.auth) {
+            this.$router.push("/");
+            return;
+        }
         bee.get(null, "AdditionalUserInfo", [], (data:BeeResponse<object>) => {
             this.additionalInfo = data.result;
         });

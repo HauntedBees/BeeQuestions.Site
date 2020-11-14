@@ -9,13 +9,13 @@
     </v-tabs>
     <Loader v-if="loading" />
     <v-container v-if="!loading">
-        <div v-if="tab===0">
+        <div v-if="offsetTab===0">
             Notifications go here.
         </div>
-        <div v-if="tab===1||tab===3">
+        <div v-if="offsetTab===1||offsetTab===3">
             <ListAnswer v-for="answer in answers" :key="answer.id" :answer="answer"/>
         </div>
-        <div v-if="tab===2||tab===4">
+        <div v-if="offsetTab===2||offsetTab===4">
             <ListQuestion :showAnswer="true" v-for="question in questions" :key="question.id" :question="question"/>
         </div>
     </v-container>
@@ -34,9 +34,10 @@ export default class HomePage extends Vue {
     answers:AnswerModel[] = [];
     questions:QuestionModel[] = [];
     created() { this.SwitchTab(0); }
+    get offsetTab() { return this.tab + (this.isLoggedInUser ? 0 : 1); }
     async SwitchTab(tab:number) {
         this.tab = tab;
-        switch(this.tab) {
+        switch(this.offsetTab) {
             case 1: this.answers = await bee.getStandardValue(this, "UserAnswers", [this.name]); break;
             case 2: this.questions = await bee.getStandardValue(this, "UserQuestions", [this.name]); break;
             case 3: this.answers = await bee.getStandardValue(this, "UserBookmarkedAnswers", []); break;
