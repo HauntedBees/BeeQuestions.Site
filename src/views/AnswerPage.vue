@@ -21,7 +21,7 @@
                         <LoadableTooltipIconButton color="primary" @submit="BookmarkAnswer" 
                             :icon="(answer && answer.liked) ? 'bookmark-minus' : 'bookmark-plus'"
                             :textkey="(answer && answer.liked) ? 'unsavebookmark' : 'savebookmark'" />
-                        <v-btn color="primary" class="ml-5" @click="isAsking=true"><v-icon>mdi-comment-question</v-icon> Question</v-btn>
+                        <v-btn :disabled="$store.state.userInfo.blockdate !== null" color="primary" class="ml-5" @click="isAsking=true"><v-icon>mdi-comment-question</v-icon> Question</v-btn>
                     </div>
                 </div>
                 <div class="pa-2" v-if="isAsking">
@@ -32,13 +32,14 @@
                             name="myQuestion"
                             class="px-2"
                             outlined
+                            :disabled="$store.state.userInfo.blockdate !== null"
                             :label="$t('askquestiontextarea')"
                             v-model="myQuestion"
                             counter="500" />
                         <v-card-actions class="align-right">
                             <v-spacer></v-spacer>
                             <v-btn color="secondary" text class="ml-5" @click="isAsking=false;myQuestion=''">{{$t("cancelbutton")}}</v-btn>
-                            <LoadableButton color="primary" textkey="askbutton" :valid="myQuestion.length > 0" @submit="PostQuestion"/>
+                            <LoadableButton :disabled="$store.state.userInfo.blockdate !== null" color="primary" textkey="askbutton" :valid="myQuestion.length > 0" @submit="PostQuestion"/>
                         </v-card-actions>
                     </v-card>
                 </div>
