@@ -25,6 +25,9 @@ export default new Vuex.Store({
     sawWelcome(state) {
       state.isNew = false;
     },
+    changename(state, newname:string) {
+      state.userInfo.displayname = newname;
+    },
     login(state, userInfo:LoginResponseModel) {
       state.userInfo = userInfo.user;
       state.token = userInfo.token;

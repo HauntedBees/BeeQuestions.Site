@@ -9,8 +9,16 @@
                 </v-row>
                 <v-row class="mt-2">
                     <div class="mx-auto">
-                        <div>
+                        <div class="pb-3" v-if="editDisplayName">
+                            <v-text-field v-model="displayname" :label="$t('newdisplayname')"></v-text-field>
+                            <div>
+                                <v-btn color="secondary" class="mr-4" @click="editDisplayName=false">{{$t("cancel")}}</v-btn>
+                                <LoadableButton color="accent" textkey="save" :valid="true" @submit="ChangeName"/>
+                            </div>
+                        </div>
+                        <div class="pb-3" v-if="!editDisplayName">
                             <h1>{{$store.state.userInfo.displayname}}</h1>
+                            <a class="subtitle-2" @click="displayname = $store.state.userInfo.displayname; editDisplayName=true">{{$t("changename")}}</a>
                         </div>
                         <div>
                             <v-chip small color="accent">Lv. {{$store.state.userInfo.level}}</v-chip>
@@ -62,8 +70,23 @@
 </template>
 <script lang="ts">
 import { Vue, Component } from 'vue-property-decorator';
+import { bee, BeeResponse } from 'src/util/webmethod';
+import { Loadable } from 'src/util/Loadable';
 @Component
 export default class SettingsPage extends Vue {
     source = "twitter";
+    displayname = "";
+    editDisplayName = false;
+    ChangeName(btn:Loadable) {
+        const trimmedName = this.displayname.trim();
+        if(trimmedName === "" || trimmedName === this.$store.state.userInfo.displayname) {
+            this.editDisplayName = false;
+            return;
+        }
+        bee.post(btn, "DisplayName", trimmedName, (data:BeeResponse<boolean>) => {
+            this.$store.commit("changename", trimmedName);
+            this.editDisplayName = false;
+        });
+    }
 }
 </script>

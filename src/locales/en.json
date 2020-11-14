@@ -25,6 +25,12 @@
   "tabneedslove": "Needs Love",
   "tabclosed": "Closed",
 
+  "changename": "Change Display Name",
+  "cancel": "Cancel",
+  "save": "Save",
+  "save_loading": "Saving",
+  "newdisplayname": "Display Name",
+
   "mynotifications": "Notifications",
   "myuseranswers": "My Answers",
   "useranswers": "Answers",
