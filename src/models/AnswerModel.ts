@@ -2,6 +2,11 @@ export class TagModel {
     name = "";
     count = 0;
 }
+export class AdditionalUserModel {
+    nextLevelUp:number|null = null;
+    score = 0;
+    lastLevelUp = 0;
+}
 export class AnswerModel {
     id = 0;
     url = "";
@@ -52,4 +57,6 @@ export class UserProfileModel {
     answerLikes = 0;
     questionLikes = 0;
     bestQuestions = 0;
+    nextLevelUp:number|null = null;
+    lastLevelUp = 0;
 }

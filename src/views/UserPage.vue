@@ -11,9 +11,22 @@
                         <div class="pb-3">
                             <h1>{{userInfo.displayname}}</h1>
                         </div>
-                        <div>
-                            <v-chip small color="accent">Lv. {{userInfo.level}}</v-chip>
-                            {{userInfo.score.toLocaleString()}} beePloids
+                        <div class="align-center mx-auto">
+                            <v-row>
+                                <v-col class="my-auto">
+                                    <v-progress-circular rotate="270" :value="percentToNextLevel" size="64" width="8" color="primary">
+                                        <span style="color:#FFFFFF">Lv. {{userInfo.level}}</span>
+                                    </v-progress-circular>
+                                    <div>{{userInfo.score.toLocaleString()}} beePloids</div>
+                                    <div class="text-caption" v-if="parseInt(userInfo.score) < parseInt(userInfo.nextLevelUp)">
+                                        {{(userInfo.nextLevelUp - userInfo.score).toLocaleString()}} to Level {{parseInt(userInfo.level) + 1}}
+                                    </div>
+                                </v-col>
+                                <v-col class="my-auto">
+                                    <div class="text-h6">{{userInfo.levelTitle}}</div>
+                                    <div class="text-caption">{{userInfo.levelDesc}}</div>
+                                </v-col>
+                            </v-row>
                         </div>
                     </div>
                 </v-row>
@@ -48,6 +61,13 @@ import { UserProfileModel } from 'src/models/AnswerModel';
 export default class SettingsPage extends Vue {
     loading = true;
     userInfo:UserProfileModel|null = null;
+    get percentToNextLevel() {
+        if(this.userInfo === null) { return 0; }
+        if(this.userInfo.nextLevelUp === null) { return 100; }
+        const ploidsFromThisLevel = this.userInfo.score - this.userInfo.lastLevelUp;
+        const ploidsBetweenLevels = this.userInfo.nextLevelUp - this.userInfo.lastLevelUp;
+        return (100 * ploidsFromThisLevel / ploidsBetweenLevels).toFixed(0);
+    }
     created() {
         const displayname = this.$route.params.id;
         if(displayname === "" || displayname === undefined) {

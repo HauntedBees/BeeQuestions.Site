@@ -28,9 +28,22 @@
                             <h1>{{$store.state.userInfo.displayname}}</h1>
                             <a class="subtitle-2" @click="displayname = $store.state.userInfo.displayname; editDisplayName=true">{{$t("changename")}}</a>
                         </div>
-                        <div>
-                            <v-chip small color="accent">Lv. {{$store.state.userInfo.level}}</v-chip>
-                            {{$store.state.userInfo.score.toLocaleString()}} beePloids
+                        <div class="align-center mx-auto" v-if="additionalInfo">
+                            <v-row>
+                                <v-col class="my-auto">
+                                    <v-progress-circular rotate="270" :value="percentToNextLevel" size="64" width="8" color="primary">
+                                        <span style="color:#FFFFFF">Lv. {{$store.state.userInfo.level}}</span>
+                                    </v-progress-circular>
+                                    <div>{{$store.state.userInfo.score.toLocaleString()}} beePloids</div>
+                                    <div class="text-caption" v-if="parseInt(additionalInfo.score) < parseInt(additionalInfo.nextLevelUp)">
+                                        {{(additionalInfo.nextLevelUp - additionalInfo.score).toLocaleString()}} to Level {{$store.state.userInfo.level + 1}}
+                                    </div>
+                                </v-col>
+                                <v-col class="my-auto">
+                                    <div class="text-h6">{{additionalInfo.levelTitle}}</div>
+                                    <div class="text-caption">{{additionalInfo.levelDesc}}</div>
+                                </v-col>
+                            </v-row>
                         </div>
                     </div>
                 </v-row>
@@ -138,6 +151,7 @@
 <script lang="ts">
 import { Vue, Component } from 'vue-property-decorator';
 import { bee, BeeResponse } from 'src/util/webmethod';
+import { AdditionalUserModel } from 'src/models/AnswerModel';
 import { Loadable } from 'src/util/Loadable';
 @Component
 export default class SettingsPage extends Vue {
@@ -145,13 +159,20 @@ export default class SettingsPage extends Vue {
     editDisplayName = false;
     editingColor = "";
     editingEmoji = "";
-    additionalInfo:object|null = null;
+    additionalInfo:AdditionalUserModel|null = null;
+    get percentToNextLevel() {
+        if(this.additionalInfo === null) { return 0; }
+        if(this.additionalInfo.nextLevelUp === null) { return 100; }
+        const ploidsFromThisLevel = this.additionalInfo.score - this.additionalInfo.lastLevelUp;
+        const ploidsBetweenLevels = this.additionalInfo.nextLevelUp - this.additionalInfo.lastLevelUp;
+        return (100 * ploidsFromThisLevel / ploidsBetweenLevels).toFixed(0);
+    }
     created() {
         if(!this.$store.state.auth) {
             this.$router.push("/");
             return;
         }
-        bee.get(null, "AdditionalUserInfo", [], (data:BeeResponse<object>) => {
+        bee.get(null, "AdditionalUserInfo", [], (data:BeeResponse<AdditionalUserModel>) => {
             this.additionalInfo = data.result;
         });
     }

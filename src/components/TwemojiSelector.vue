@@ -7,7 +7,7 @@
         <v-col cols="12" sm="3">
             <v-color-picker class="mx-auto" dot-size="25" v-model="currentColor" hide-mode-switch mode="hexa" />
         </v-col>
-        <v-col cols="12" sm="9" ref="emojiset">
+        <v-col cols="12" sm="9" ref="emojiset" style="max-height:350px; overflow-y:auto">
             <v-btn class="e-size32px" @click="baseEmoji=emoji" v-for="emoji in emojis" :key="emoji.codepoint">{{emoji.twemoji}}</v-btn>
         </v-col>
     </v-row>
