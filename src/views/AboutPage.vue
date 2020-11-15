@@ -4,7 +4,7 @@
         <v-col cols="12" sm="2" class="hidden-sm-and-down" />
         <v-col cols="12" sm="8">
             <v-sheet class="mb-4 pa-2 text-left px-4">
-                <h1>What This Is?</h1>
+                <h1>Bee Questions v1.9 - What This Is?</h1>
                 <p>
                     Lots of websites let you ask questions and get answers. That's pretty helpful. Sometimes it's even funny. But not always. That's where <strong>Bee Questions</strong>
                     comes in. Users post words or phrases that are probably the answer to multiple questions. Then everyone else tries to figure out what those questions are.
@@ -29,7 +29,7 @@
                 <p>
                     Additional Code and Asset Credits:
                     <ol style="list-style-type:disc" class="ml-12">
-                        <li v-for="a in attributions" :key="a.name"><attr :name="a.name" :nameURL="a.nameURL" :by="a.by" :byURL="a.byURL" :license="a.license" /></li>
+                        <li v-for="a in attributions" :key="a.name"><attr :name="a.name" :nameURL="a.nameURL" :by="a.by" :byURL="a.byURL" :license="a.license" :secondlicense="a.license2" /></li>
                     </ol>
                 </p>
             </v-sheet>
@@ -50,7 +50,8 @@ export default class AboutPage extends Vue {
         { name: "Vue I18n", nameURL: "https://kazupon.github.io/vue-i18n/", by: "Kazuya Kawaguchi", byURL: "https://github.com/kazupon", license: "MIT" },
         { name: "vuex-persistedstate", nameURL: "https://www.npmjs.com/package/vuex-persistedstate", by: "Robin van der Vleuten", byURL: "https://github.com/robinvdvleuten", license: "MIT" },
         { name: "core-js", nameURL: "https://www.npmjs.com/package/core-js", by: "Denis Pushkarev", byURL: "https://github.com/zloirock", license: "MIT" },
-        { name: "Day.js", nameURL: "https://day.js.org/", by: "iamkun", byURL: "https://github.com/iamkun", license: "MIT" }
+        { name: "Day.js", nameURL: "https://day.js.org/", by: "iamkun", byURL: "https://github.com/iamkun", license: "MIT" },
+        { name: "Twemoji", nameURL: "https://twemoji.twitter.com/", by: "Twitter", byURL: "https://github.com/twitter", license: "CC-BY 4.0", license2: "MIT" }
     ];
 }
 </script>
