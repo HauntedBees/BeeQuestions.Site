@@ -8,3 +8,10 @@ export class AdminUserViewModel {
     answersThisWeek = 0;
     blockdate = "";
 }
+export class AdminFlagModel {
+    id = 0;
+    type = "";
+    value = "";
+    reported = "";
+    reportedBy = "";
+}

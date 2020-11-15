@@ -18,7 +18,7 @@
                     </v-card-subtitle>
                 </v-card>
                 <div class="pa-2" v-if="$store.state.auth">
-                    <LoadableTooltipIconButton color="error" icon="flag" textkey="flaganswer" />
+                    <LoadableTooltipIconButton color="error" @submit="FlagAnswer" icon="flag" textkey="flaganswer" />
                     <div class="float-right">
                         <LoadableTooltipIconButton color="primary" @submit="BookmarkAnswer" 
                             :icon="(answer && answer.liked) ? 'bookmark-minus' : 'bookmark-plus'"
@@ -160,6 +160,9 @@ export default class AnswerPage extends Vue {
             arr[ridx] = temp;
         }
         return arr;
+    }
+    FlagAnswer(btn:Loadable) {
+        bee.post(btn, "Report", { id: this.answerid, type: "answer" });
     }
 }
 </script>

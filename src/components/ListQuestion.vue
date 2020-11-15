@@ -22,7 +22,7 @@
         </span>
       </v-card-subtitle>
       <v-spacer/>
-      <LoadableTooltipIconButton color="error" cssclass="mr-8" icon="flag" textkey="flagquestion" />
+      <LoadableTooltipIconButton @submit="FlagQuestion" color="error" cssclass="mr-8" icon="flag" textkey="flagquestion" />
       <LoadableTooltipIconButton @submit="ToggleVote" :color="votecolor" :icon="voteIcon" :textkey="question.liked ? 'unvotequestion' : 'votequestion'" />
     </v-row>
   </v-card>
@@ -57,6 +57,10 @@ export default class ListQuestion extends Vue {
       this.alreadyLiked = data.result;
       this.question.score += data.result ? 1 : -1;
     });
+  }
+  FlagQuestion(btn:Loadable) {
+    if(this.question === undefined) { return; }
+    bee.post(btn, "Report", { id: this.question.id, type: "question" });
   }
 }
 </script>

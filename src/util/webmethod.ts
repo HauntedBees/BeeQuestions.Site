@@ -10,12 +10,12 @@ class Beeliever {
     maybeAuth() { return store.state.token !== "" ? { "Authorization": "Bearer " + store.state.token } : undefined; }
     maybeCreds() { return store.state.token !== "" ? "same-origin" : "omit"; }
     getHeaders() { return this.withCredentials ? { "Authorization": "Bearer " + store.state.token } : undefined; }
-    handleResponse(response:Response, caller:Loadable|null, successCallback:Function, errorCallback?:Function) {
+    handleResponse(response:Response, caller:Loadable|null, successCallback?:Function, errorCallback?:Function) {
         if(caller !== null) { caller.loading = false; }
         if(response.ok) {
             response.json().then(data => {
                 if(store && data.message) { store.commit("setMessage", ["success", data.message]); }
-                if(data.success) {
+                if(data.success && successCallback !== undefined) {
                     successCallback(data);
                 } else if(errorCallback !== undefined) {
                     errorCallback(data);
@@ -72,7 +72,7 @@ class Beeliever {
             if(caller !== null) { caller.loading = false; }
         }
     }
-    post(caller:Loadable|null, path:string, obj:unknown, successCallback:Function) {
+    post(caller:Loadable|null, path:string, obj:unknown, successCallback?:Function) {
         if(caller !== null) { caller.loading = true; }
         fetch(this.path + path + "/", {
             method: "POST",
