@@ -12,7 +12,8 @@
                     <v-card-subtitle>
                         {{$dayjs(answer.opened).fromNow()}}
                          • 
-                        <i18n path="votingends">{{$dayjs(answer.opened).add(10, "d").toNow(true)}}</i18n>
+                        <i18n v-if="!answer.closed" path="votingends">{{$dayjs(answer.closedate).toNow(true)}}</i18n>
+                        <i18n v-if="answer.closed" path="votingended">{{$dayjs(answer.closed).fromNow()}}</i18n>
                     </v-card-subtitle>
                 </v-card>
                 <div class="pa-2" v-if="$store.state.auth">
@@ -21,10 +22,15 @@
                         <LoadableTooltipIconButton color="primary" @submit="BookmarkAnswer" 
                             :icon="(answer && answer.liked) ? 'bookmark-minus' : 'bookmark-plus'"
                             :textkey="(answer && answer.liked) ? 'unsavebookmark' : 'savebookmark'" />
-                        <v-btn :disabled="$store.state.userInfo.blockdate !== null" color="primary" class="ml-5" @click="isAsking=true"><v-icon>mdi-comment-question</v-icon> Question</v-btn>
+                        <v-btn :disabled="$store.state.userInfo.blockdate !== null || answer.closed !== null" color="primary" class="ml-5" @click="isAsking=true"><v-icon>mdi-comment-question</v-icon> Question</v-btn>
                     </div>
                 </div>
-                <div class="pa-2" v-if="isAsking">
+                <div class="pa-2 pb-4" v-if="answer.closed">
+                    <h3 class="pl-2">{{$t("winningquestion")}}</h3>
+                    <ListQuestion :key="bestquestion.id" :question="bestquestion" />
+                    <v-divider/>
+                </div>
+                <div class="pa-2" v-if="isAsking && !answer.closed">
                     <v-card color="accent" elevation="2">
                         <v-card-title>{{$t("askquestion")}}</v-card-title>
                         <v-card-subtitle>{{$t("askquestiondesc")}}</v-card-subtitle>
@@ -77,6 +83,11 @@ export default class AnswerPage extends Vue {
     alreadyLiked = false;
     answer:FullAnswerModel|null = null;
     sort = 0;
+    get bestquestion() {
+        if(this.answer === null) { return new QuestionModel(); }
+        const a = this.answer; // typescript linter does a big mad if I don't do this
+        return a.questions.filter(q => q.id === a.bestquestion)[0];
+    }
     created() {
         const id = this.$route.params.id;
         if(id === "" || id === undefined) {

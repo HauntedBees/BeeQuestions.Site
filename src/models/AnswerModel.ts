@@ -9,6 +9,7 @@ export class AnswerModel {
     answer = "";
     status = "";
     opened = "";
+    closedate = "";
     closed = "";
     tags:string[] = [];
     questions = 0;
@@ -33,6 +34,7 @@ export class FullAnswerModel {
     opened = "";
     closed = "";
     liked = false;
+    bestquestion = 0;
     tags:string[] = [];
     questions:QuestionModel[] = [];
 }

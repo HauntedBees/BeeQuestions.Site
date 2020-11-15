@@ -49,7 +49,9 @@
   "savebookmark": "Bookmark Answer",
   "unsavebookmark": "Remove Bookmark",
   "flaganswer": "Flag Answer",
-  "votingends": "Voting ends in {0}",
+  "votingends": "Questioning ends in {0}",
+  "votingended": "Questioning ended {0}",
+  "winningquestion": "Winning Question",
 
   "flagquestion": "Flag Question",
   "votequestion": "Vote for Question",
