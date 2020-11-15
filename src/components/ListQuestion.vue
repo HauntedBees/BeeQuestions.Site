@@ -9,6 +9,10 @@
         <v-card-title v-if="showAnswer" class="pb-0">Q: {{question.question}}</v-card-title>
         <v-card-title v-if="showAnswer" class="pt-0 mx-5 subtitle-1">A: {{question.answer}}</v-card-title>
       </div>
+      <v-spacer />
+      <div>
+        <UserAvatar css="mr-8 mt-4" :displayname="question.author" :color="question.authorcolor" :emoji="question.authoremoji" />
+      </div>
     </v-row>
     <v-row align="center" justify="end" class="mr-2" v-if="$store.state.auth">
       <v-card-subtitle class="mx-3 pb-2">

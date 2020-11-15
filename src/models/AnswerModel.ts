@@ -20,6 +20,8 @@ export class QuestionModel {
     answerURL = "";
     winner = false;
     author = "";
+    authorcolor = "";
+    authoremoji = "";
     question = "";
     posted = "";
     score = 0;
@@ -29,6 +31,8 @@ export class QuestionModel {
 export class FullAnswerModel {
     id = 0;
     author = "";
+    authorcolor = "";
+    authoremoji = "";
     answer = "";
     status = "";
     opened = "";

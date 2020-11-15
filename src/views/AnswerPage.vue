@@ -6,7 +6,8 @@
             <v-sheet class="mb-4 pa-2" v-if="answer !== null">
                 <v-card color="accent" class="ma-2" elevation="2">
                     <v-card-subtitle class="pb-0">
-                      <Tag v-for="tag in answer.tags" small :key="tag" :tag="tag" />
+                        <UserAvatar css="mr-2" :displayname="answer.author" :color="answer.authorcolor" :emoji="answer.authoremoji" />
+                        <Tag v-for="tag in answer.tags" small :key="tag" :tag="tag" />
                     </v-card-subtitle>
                     <v-card-title class="pt-2">{{answer.answer}}</v-card-title>
                     <v-card-subtitle>

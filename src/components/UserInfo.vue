@@ -16,7 +16,7 @@
             <v-expansion-panel-header class="ma-0 pa-0" :hide-actions="hideExpandIcon" :disabled="hideExpandIcon">
                 <v-row>
                     <v-col cols="3">
-                        <v-avatar @click="$router.push('/settings')" size="48" :color="$store.state.userInfo.color"><emoji class="pt-1" :emoji="$store.state.userInfo.emoji"/></v-avatar>
+                        <UserAvatar :settings="true" :color="$store.state.userInfo.color" :emoji="$store.state.userInfo.emoji" />
                     </v-col>
                     <v-col cols="9">
                         <div>
