@@ -22,7 +22,7 @@
                         <LoadableTooltipIconButton color="primary" @submit="BookmarkAnswer" 
                             :icon="(answer && answer.liked) ? 'bookmark-minus' : 'bookmark-plus'"
                             :textkey="(answer && answer.liked) ? 'unsavebookmark' : 'savebookmark'" />
-                        <v-btn :disabled="$store.state.userInfo.blockdate !== null || answer.closed !== null" color="primary" class="ml-5" @click="isAsking=true"><v-icon>mdi-comment-question</v-icon> Question</v-btn>
+                        <v-btn :disabled="!canAsk" color="primary" class="ml-5" @click="isAsking=true"><v-icon>mdi-comment-question</v-icon> Question</v-btn>
                     </div>
                 </div>
                 <div class="pa-2 pb-4" v-if="answer.closed">
@@ -45,7 +45,7 @@
                         <v-card-actions class="align-right">
                             <v-spacer></v-spacer>
                             <v-btn color="secondary" text class="ml-5" @click="isAsking=false;myQuestion=''">{{$t("cancelbutton")}}</v-btn>
-                            <LoadableButton :disabled="$store.state.userInfo.blockdate !== null" color="primary" textkey="askbutton" :valid="myQuestion.length > 0" @submit="PostQuestion"/>
+                            <LoadableButton :disabled="!canAsk" color="primary" textkey="askbutton" :valid="myQuestion.length > 0" @submit="PostQuestion"/>
                         </v-card-actions>
                     </v-card>
                 </div>
@@ -88,6 +88,7 @@ export default class AnswerPage extends Vue {
         const a = this.answer; // typescript linter does a big mad if I don't do this
         return a.questions.filter(q => q.id === a.bestquestion)[0];
     }
+    get canAsk() { return this.answer.closed === null && this.$store.state.userInfo.blockdate !== null && this.answer?.yours === false; }
     created() {
         const id = this.$route.params.id;
         if(id === "" || id === undefined) {

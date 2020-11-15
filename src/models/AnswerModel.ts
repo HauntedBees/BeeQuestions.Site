@@ -33,6 +33,7 @@ export class FullAnswerModel {
     status = "";
     opened = "";
     closed = "";
+    yours = false;
     liked = false;
     bestquestion = 0;
     tags:string[] = [];
