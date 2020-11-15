@@ -136,7 +136,7 @@
                                     </v-card-actions>
                                 </v-card>
                             </v-dialog>
-                            <v-btn class="mb-2" color="secondary">{{$t("deactivateAccount")}}</v-btn>
+                            <!--<v-btn class="mb-2" color="secondary">{{$t("deactivateAccount")}}</!-->
                         </div>
                     </v-sheet>
                 </v-col>
