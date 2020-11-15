@@ -14,6 +14,7 @@ class Beeliever {
         if(caller !== null) { caller.loading = false; }
         if(response.ok) {
             response.json().then(data => {
+                if(data.sessionexpired) { store.commit("silentlogout"); }
                 if(store && data.message) { store.commit("setMessage", ["success", data.message]); }
                 if(data.success && successCallback !== undefined) {
                     successCallback(data);
@@ -24,6 +25,7 @@ class Beeliever {
         } else {
             response.json().then(error => {
                 if(store) {
+                    if(error.sessionexpired) { store.commit("silentlogout"); }
                     if(error.message) {
                         store.commit("setMessage", ["error", error.message]);
                     } else if(response.status === 401) {
@@ -66,7 +68,6 @@ class Beeliever {
             const rjson = await response.json();
             return rjson.result;
         } catch(e) {
-            console.log(e);
             return null;
         } finally {
             if(caller !== null) { caller.loading = false; }
@@ -95,6 +96,7 @@ export const bee = new Beeliever(process.env.VUE_APP_API_PATH || "", false);
 export const beeSecure = new Beeliever(process.env.VUE_APP_SECURE_API_PATH || "", true);
 export class BeeResponse<T> {
     success:boolean;
+    sessionexpired?:boolean;
     result:T;
     constructor(x:T) {
         this.success = true;

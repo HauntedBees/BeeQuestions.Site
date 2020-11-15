@@ -20,6 +20,7 @@ export default new Vuex.Store({
       state.infotype = msgInfo[0];
     },
     rememberlocation(state, path:string) {
+      if(["/login", "/signup", "/oauth"].indexOf(path) >= 0) { return; }
       state.lastpath = path;
     },
     sawWelcome(state) {
@@ -43,6 +44,11 @@ export default new Vuex.Store({
       state.auth = false;
       state.token = "";
       window.location.reload();
+    },
+    silentlogout(state) {
+      state.userInfo = new UserInfoModel();
+      state.auth = false;
+      state.token = "";
     }
   }
 })
