@@ -27,6 +27,7 @@
                             </v-row>
                         </v-btn>
                     </li>
+                    <li><LoadMore @loadmore="Paginate" :reachedEnd="endOfList" /></li>
                 </ul>
             </v-sheet>
         </v-col>
@@ -53,7 +54,17 @@ export default class BrowseTagsPage extends Loadable {
             this.tops = ["All", ...data.result];
         });
     }
+    get querytab() { return this.tab === 0 ? "all" : this.tops[this.tab]; }
     SwitchTab(tab:number) { this.tab = tab; this.GetTags(); }
-    async GetTags() { this.tags = await bee.getStandardValue(this, "TagBrowse", [this.tab === 0 ? "all" : this.tops[this.tab]]); }
+    async GetTags() {
+        this.tags = await bee.getStandardValue(this, "TagBrowse", [this.querytab]);
+        this.endOfList = false;
+    }
+    endOfList = false;
+    async Paginate(newPage:number) {
+        const response = await bee.getStandardValue(null, "TagBrowse", [this.querytab, newPage]);
+        this.endOfList = response.length === 0;
+        this.tags.push(...response);
+    }
 }
 </script>

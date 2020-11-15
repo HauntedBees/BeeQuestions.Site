@@ -14,9 +14,11 @@
         </div>
         <div v-if="offsetTab===1||offsetTab===3">
             <ListAnswer v-for="answer in answers" :key="answer.id" :answer="answer"/>
+            <LoadMore @loadmore="Paginate" :reachedEnd="endOfList" />
         </div>
         <div v-if="offsetTab===2||offsetTab===4">
             <ListQuestion :showAnswer="true" v-for="question in questions" :key="question.id" :question="question"/>
+            <LoadMore @loadmore="Paginate" :reachedEnd="endOfList" />
         </div>
     </v-container>
 </v-container>
@@ -42,6 +44,24 @@ export default class HomePage extends Vue {
             case 2: this.questions = await bee.getStandardValue(this, "UserQuestions", [this.name]); break;
             case 3: this.answers = await bee.getStandardValue(this, "UserBookmarkedAnswers", []); break;
             case 4: this.questions = await bee.getStandardValue(this, "UserBookmarkedQuestions", []); break;
+        }
+        this.endOfList = false;
+    }
+    endOfList = false;
+    async Paginate(newPage:number) {
+        let response = [];
+        switch(this.offsetTab) {
+            case 1: response = await bee.getStandardValue(null, "UserAnswers", [this.name, newPage]); break;
+            case 2: response = await bee.getStandardValue(null, "UserQuestions", [this.name, newPage]); break;
+            case 3: response = await bee.getStandardValue(null, "UserBookmarkedAnswers", [newPage]); break;
+            case 4: response = await bee.getStandardValue(null, "UserBookmarkedQuestions", [newPage]); break;
+        }
+        this.endOfList = response.length === 0;
+        switch(this.offsetTab) {
+            case 1:
+            case 3: this.answers.push(...response); break;
+            case 2: 
+            case 4: this.questions.push(...response); break;
         }
     }
 }

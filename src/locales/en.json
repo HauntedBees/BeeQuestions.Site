@@ -23,6 +23,7 @@
   "populartags": "Popular Tags",
   "browsetags": "Browse Tags",
   "taganswers": "{0} Answers",
+  "reachedend": "You've reached the end of the list!",
 
   "notag": "There are no {0} Answers. Maybe you should {1}.",
   "notaglink": "answer one",

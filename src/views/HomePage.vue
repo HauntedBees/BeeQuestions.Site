@@ -21,6 +21,7 @@
             <Loader v-if="loading" />
             <div v-if="!loading">
               <ListAnswer v-for="answer in answers" :key="answer.id" :answer="answer"/>
+              <LoadMore @loadmore="Paginate" :reachedEnd="endOfList" />
             </div>
           </div>
         </v-sheet>
@@ -48,7 +49,16 @@ export default class HomePage extends Loadable {
     this.tags = await bee.getStandardValue(this, "Tags", ["popular"]);
   }
   async SwitchTab(tab:number) {
+    this.tab = tab;
     this.answers = await bee.getStandardValue(this, "HomePageAnswers", [tab]);
+    this.endOfList = false;
+  }
+  tab = 0;
+  endOfList = false;
+  async Paginate(newPage:number) {
+    const response = await bee.getStandardValue(null, "HomePageAnswers", [this.tab, newPage]);
+    this.endOfList = response.length === 0;
+    this.answers.push(...response);
   }
 }
 </script>

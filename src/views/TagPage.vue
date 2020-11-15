@@ -19,6 +19,7 @@
                             <router-link to="/answers/new">{{$t("notaglink")}}</router-link>
                         </i18n>
                     </div>
+                    <LoadMore v-if="answers.length > 0" @loadmore="Paginate" :reachedEnd="endOfList" />
                 </div>
             </v-sheet>
         </v-col>
@@ -48,7 +49,16 @@ export default class TagPage extends Loadable {
         this.SwitchTab(0);
     }
     async SwitchTab(tab:number) {
+        this.tab = tab;
         this.answers = await bee.getStandardValue(this, "TagAnswers", [this.tag, tab]);
+        this.endOfList = false;
+    }
+    tab = 0;
+    endOfList = false;
+    async Paginate(newPage:number) {
+        const response = await bee.getStandardValue(null, "TagAnswers", [this.tag, this.tab, newPage]);
+        this.endOfList = response.length === 0;
+        this.answers.push(...response);
     }
 }
 </script>
