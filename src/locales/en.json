@@ -61,8 +61,17 @@
   "noquestion": "There are no Questions for this Answer... yet. Maybe you should {0}.",
   "noquestionlink": "ask one",
   "askquestion": "Ask a Question!",
-  "askquestiondesc": "First time asking? Try to come up with a Question that could be answered by the Answer above this!",
+  "askquestiondesc": "Try to come up with a Question that could be answered by the Answer above this!",
   "askquestiontextarea": "Type your question here",
+
+  "giveanswer": "Give an Answer!",
+  "giveanswerdesc": "Asking questions and expecting answers is overdone. Here, you give answers and expect questions! So, answer away!",
+  "giveanswertextarea": "Type your answer here",
+  "tagselectlabel": "Select up to five Tags",
+  "taghint_low": "Once you reach level 3, you can create your own tags",
+  "taghint_high": "You can also create your own tags.",
+  "submit": "Submit",
+  "submit_loading": "Posting",
 
   "cancelbutton": "Cancel",
   "askbutton": "Ask",

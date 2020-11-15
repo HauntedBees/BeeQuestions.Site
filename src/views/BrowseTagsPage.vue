@@ -1,8 +1,8 @@
 <template>
 <v-container>
     <v-row>
-        <v-col cols="12" sm="2" class="hidden-sm-and-down" />
-        <v-col cols="12" sm="8">
+        <v-col cols="12" sm="2" order="2" class="hidden-sm-and-down" />
+        <v-col cols="12" sm="8" order="3">
             <v-sheet class="mb-4 pa-2">
                 <h2 class="px-3 py-1">Browsing Tags</h2>
             </v-sheet>
@@ -29,6 +29,9 @@
                     </li>
                 </ul>
             </v-sheet>
+        </v-col>
+        <v-col cols="12" sm="2" order="1" order-md="4">
+            <UserInfo />
         </v-col>
     </v-row>
 </v-container>

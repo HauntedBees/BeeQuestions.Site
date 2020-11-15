@@ -42,6 +42,7 @@
                             :disabled="$store.state.userInfo.blockdate !== null"
                             :label="$t('askquestiontextarea')"
                             v-model="myQuestion"
+                            maxlength="500"
                             counter="500" />
                         <v-card-actions class="align-right">
                             <v-spacer></v-spacer>

@@ -14,20 +14,54 @@
     <v-expansion-panels v-if="$store.state.auth" flat :value="showUserInfo">
         <v-expansion-panel>
             <v-expansion-panel-header class="ma-0 pa-0" :hide-actions="hideExpandIcon" :disabled="hideExpandIcon">
-                <v-row>
-                    <v-col cols="3">
-                        <UserAvatar :settings="true" :color="$store.state.userInfo.color" :emoji="$store.state.userInfo.emoji" />
-                    </v-col>
-                    <v-col cols="9">
-                        <div>
-                            <span class="mr-3">{{$store.state.userInfo.displayname}}</span>
-                            <v-chip small color="accent">Lv. {{$store.state.userInfo.level}}</v-chip>
-                        </div>
-                        <div>
-                            {{$store.state.userInfo.score.toLocaleString()}} beePloids
-                        </div>
-                    </v-col>
-                </v-row>
+                <v-container class="pa-0">
+                    <v-row>
+                        <v-col cols="3">
+                            <UserAvatar :settings="true" :color="$store.state.userInfo.color" :emoji="$store.state.userInfo.emoji" />
+                        </v-col>
+                        <v-col cols="9">
+                            <div>
+                                <span class="mr-3">{{$store.state.userInfo.displayname}}</span>
+                                <v-chip small color="accent">Lv. {{$store.state.userInfo.level}}</v-chip>
+                            </div>
+                            <div>
+                                {{$store.state.userInfo.score.toLocaleString()}} beePloids
+                            </div>
+                        </v-col>
+                    </v-row>
+                    <v-row class="ml-1">
+                        <v-dialog v-model="showAnswerDialog" width="640">
+                            <template v-slot:activator="{ on, attrs }">
+                                <v-btn v-bind="attrs" v-on="on" color="primary" @click.stop="GiveAnswer" class="mx-auto">Give an Answer</v-btn>
+                            </template>
+                            <v-card style="border: 1px solid white">
+                                <v-card-title>{{$t("giveanswer")}}</v-card-title>
+                                <v-card-text>
+                                    <p>{{$t("giveanswerdesc")}}</p>
+                                    <v-textarea
+                                        outlined
+                                        :label="$t('giveanswertextarea')"
+                                        v-model="myAnswer"
+                                        maxlength="500"
+                                        counter="500" />
+                                    <v-autocomplete
+                                        v-model="tagSelection" @input="TagChange" multiple
+                                        :loading="loading" :items="tagList" :search-input.sync="tagSearch" :menu-props="tagMenuProps"
+                                        :counter="5" :counter-value="selectedCount" hide-selected hide-no-data
+                                        chips deletable-chips auto-select-first cache-items
+                                        :hint="$t($store.state.userInfo.level >= 3 ? 'taghint_high' : 'taghint_low')" persistent-hint
+                                        :label="$t('tagselectlabel')" />
+                                </v-card-text>
+                                <v-divider/>
+                                <v-card-actions>
+                                    <v-spacer/>
+                                    <v-btn color="secondary" text class="ml-5" @click="showAnswerDialog=false">{{$t("cancelbutton")}}</v-btn>
+                                    <LoadableButton color="primary" textkey="submit" :valid="myAnswer.length > 0 && tagSelection.length > 0" @submit="PostAnswer"/>
+                                </v-card-actions>
+                            </v-card>
+                        </v-dialog>
+                    </v-row>
+                </v-container>
             </v-expansion-panel-header>
             <v-expansion-panel-content>
                 <v-row class="ml-3 my-2" v-if="$store.state.userInfo.blockdate !== null">
@@ -47,10 +81,19 @@
 </v-sheet>
 </template>
 <script lang="ts">
-import { Vue, Component } from 'vue-property-decorator';
+import { Vue, Component, Watch } from 'vue-property-decorator';
+import { bee, BeeResponse } from 'src/util/webmethod';
 @Component
 export default class HomePage extends Vue {
     showUserInfoMobile:number|undefined;
+    showAnswerDialog = false;
+    myAnswer = "";
+    tagSelection:string[] = [];
+    tagSearch = "";
+    tagMenuProps = { disabled: false };
+    tagList:string[] = [];
+    loading = false;
+    selectedCount() { return this.tagSelection.length; }
     get showUserInfo() {
         switch(this.$vuetify.breakpoint.name) {
             case "xl":
@@ -70,6 +113,33 @@ export default class HomePage extends Vue {
             default:
                 return false;
         }
+    }
+    created() { this.DoTagSearch(); }
+    delayIdx = 0;
+    @Watch("tagSearch")
+    searchChanged(value:string|null) {
+        window.clearTimeout(this.delayIdx);
+        if(value) { this.delayIdx = window.setTimeout(() => this.DoTagSearch(), 300); }
+    }
+    async DoTagSearch() {
+        if(this.tagSearch === null) { return; }
+        this.tagList = await bee.getStandardValue(this, "AutocompleteTags", [this.tagSearch]);
+        if(this.$store.state.userInfo.level >= 3 && this.tagSearch.length >= 3) {
+            this.tagList.push(this.tagSearch.substring(0, 15));
+        }
+    }
+    TagChange() {
+        this.tagMenuProps.disabled = this.tagSelection.length >= 5;
+        if(this.tagSelection.length > 5) {
+            this.tagSelection = this.tagSelection.splice(0, 5);
+        }
+        this.tagSearch = "";
+    }
+    GiveAnswer() { this.myAnswer = ""; this.tagSelection = []; this.tagSearch = ""; }
+    PostAnswer() {
+        bee.post(null, "Answer", { answer: this.myAnswer, tags: this.tagSelection }, (data:BeeResponse<string>) => {
+            this.$router.push("/answer/" + data.result);
+        });
     }
 }
 </script>
