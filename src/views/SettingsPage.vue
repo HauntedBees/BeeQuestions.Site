@@ -141,6 +141,7 @@
                     </v-sheet>
                 </v-col>
                 <v-col cols="12" sm="8">
+                    <a name="notifs" />
                     <v-sheet><UserActivity :name="$store.state.userInfo.displayname" :isLoggedInUser="true" /></v-sheet>
                 </v-col>
             </v-row>

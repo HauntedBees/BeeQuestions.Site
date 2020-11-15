@@ -17,7 +17,9 @@
                 <v-container class="pa-0">
                     <v-row>
                         <v-col cols="3">
-                            <UserAvatar :settings="true" :color="$store.state.userInfo.color" :emoji="$store.state.userInfo.emoji" />
+                            <v-badge overlap :content="$store.state.userInfo.totalunread" :value="$store.state.userInfo.notifications.length > 0">
+                                <UserAvatar :settings="true" :color="$store.state.userInfo.color" :emoji="$store.state.userInfo.emoji" />
+                            </v-badge>
                         </v-col>
                         <v-col cols="9">
                             <div>
@@ -63,7 +65,7 @@
                     </v-row>
                 </v-container>
             </v-expansion-panel-header>
-            <v-expansion-panel-content>
+            <v-expansion-panel-content class="px-0">
                 <v-row class="ml-3 my-2" v-if="$store.state.userInfo.blockdate !== null">
                     <div class="text-caption"><strong>Posting Block for:</strong> {{$dayjs($store.state.userInfo.blockdate).fromNow(true)}}</div>
                 </v-row>
@@ -72,8 +74,18 @@
                     <div class="text-caption"><strong>{{$t("remainingAnswers")}}:</strong> {{$store.state.userInfo.answersPerDay - $store.state.userInfo.answersGiven}}</div>
                 </v-row>
                 <v-divider />
-                <v-row class="ml-3 my-2">
-                    Notifications go here
+                <v-row class="my-2">
+                    <div style="width:100%">
+                        <div>
+                            <Notification v-for="notification in $store.state.userInfo.notifications" :homescreen="true" :key="notification.id" :notification="notification" />
+                        </div>
+                        <div class="text-caption text-right mb-2" v-if="($store.state.userInfo.totalunread - $store.state.userInfo.notifications.length) > 0">
+                            <i18n path="andXMore">
+                                {{$store.state.userInfo.totalunread - $store.state.userInfo.notifications.length}}
+                            </i18n>
+                        </div>
+                    </div>
+                    <div class="text-caption mx-auto"><router-link to="/settings#notifs">{{$t("viewallnotifications")}}</router-link></div>
                 </v-row>
             </v-expansion-panel-content>
         </v-expansion-panel>
@@ -133,7 +145,7 @@ export default class HomePage extends Vue {
     }
     destroyed() { this.componentDestroyed = true; window.clearTimeout(this.refreshIdx); }
 
-    created() { this.DoTagSearch(); this.RefreshUserInfo(); }
+    created() { this.RefreshUserInfo(); }
     delayIdx = 0;
     @Watch("tagSearch")
     searchChanged(value:string|null) {
@@ -154,7 +166,12 @@ export default class HomePage extends Vue {
         }
         this.tagSearch = "";
     }
-    GiveAnswer() { this.myAnswer = ""; this.tagSelection = []; this.tagSearch = ""; }
+    GiveAnswer() {
+        this.myAnswer = "";
+        this.tagSelection = [];
+        this.tagSearch = "";
+        this.DoTagSearch();
+    }
     PostAnswer() {
         bee.post(null, "Answer", { answer: this.myAnswer, tags: this.tagSelection }, (data:BeeResponse<string>) => {
             this.$router.push("/answer/" + data.result);

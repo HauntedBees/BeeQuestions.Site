@@ -41,6 +41,11 @@
 
 	"nonewmessages": "You have no new notifications.",
 	"viewallnotifications": "View All Notifications",
+	"notifAnswer": "Your answer \"{0}\" now has a question!",
+	"notifQuestion": "Your question \"{0}\" won Best Question!",
+	"notifLevelUp": "You leveled up!",
+	"andXMore": "...and {0} more!",
+	"dismissAllNotifications": "Dismiss All",
 
 	"mynotifications": "Notifications",
 	"myuseranswers": "My Answers",

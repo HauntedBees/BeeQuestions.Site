@@ -13,6 +13,8 @@ export class UserInfoModel {
     answersGiven = 0;
     source = "";
     sourcename = "";
+    notifications:NotificationModel[] = [];
+    totalunread = 0;
 }
 export class RefreshedUserInfoModel {
     notLoggedIn = false;
@@ -22,6 +24,16 @@ export class RefreshedUserInfoModel {
     answersPerDay = 0;
     questionsAsked = 0;
     answersGiven = 0;
+    notifications:NotificationModel[] = [];
+    totalunread = 0;
+}
+export class NotificationModel {
+    id = 0;
+    notiftype = "";
+    answerurl = "";
+    notifsubject = "";
+    posted = "";
+    seen = false;
 }
 export class LoginResponseModel {
     token = "";

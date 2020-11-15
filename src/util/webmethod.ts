@@ -7,6 +7,10 @@ class Beeliever {
         this.path = path;
         this.withCredentials = withCredentials || false;
     }
+    getParamStr(param:unknown) {
+        if(!param) { return "/"; }
+        return "/" + encodeURIComponent(JSON.stringify(param));
+    }
     maybeAuth() { return store.state.token !== "" ? { "Authorization": "Bearer " + store.state.token } : undefined; }
     maybeCreds() { return store.state.token !== "" ? "same-origin" : "omit"; }
     getHeaders() { return this.withCredentials ? { "Authorization": "Bearer " + store.state.token } : undefined; }
@@ -49,7 +53,7 @@ class Beeliever {
     }
     get(caller:Loadable|null, path:string, param:unknown, successCallback:Function, errorCallback?:Function) {
         if(caller !== null) { caller.loading = true; }
-        const paramStr = !param ? "/" : ("/" + encodeURIComponent(JSON.stringify(param)));
+        const paramStr = this.getParamStr(param);
         fetch(this.path + path + paramStr, {
             method: "GET",
             headers: this.maybeAuth(),
@@ -58,7 +62,7 @@ class Beeliever {
     }
     async getStandardValue(caller:Loadable|null, path:string, param:unknown) {
         if(caller !== null) { caller.loading = true; }
-        const paramStr = !param ? "/" : ("/" + encodeURIComponent(JSON.stringify(param)));
+        const paramStr = this.getParamStr(param);
         try {
             const response = await fetch(this.path + path + paramStr, {
                 method: "GET",
@@ -73,18 +77,18 @@ class Beeliever {
             if(caller !== null) { caller.loading = false; }
         }
     }
-    post(caller:Loadable|null, path:string, obj:unknown, successCallback?:Function) {
+    post(caller:Loadable|null, path:string, obj?:unknown, successCallback?:Function) {
         if(caller !== null) { caller.loading = true; }
         fetch(this.path + path + "/", {
             method: "POST",
-            body: JSON.stringify(obj),
+            body: obj ? JSON.stringify(obj) : undefined,
             headers: this.maybeAuth(),
             credentials: "same-origin"
         }).then(res => this.handleResponse(res, caller, successCallback));
     }
     delete(caller:Loadable|null, path:string, param:unknown, successCallback:Function) {
         if(caller !== null) { caller.loading = true; }
-        const  paramStr = !param ? "/" : ("/" + encodeURIComponent(JSON.stringify(param)));
+        const paramStr = this.getParamStr(param);
         fetch(this.path + path  + paramStr, {
             method: "DELETE",
             headers: this.getHeaders(),
