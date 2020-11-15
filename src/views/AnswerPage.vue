@@ -1,8 +1,8 @@
 <template>
 <v-container>
     <v-row>
-        <v-col cols="12" sm="2" />
-        <v-col cols="12" sm="8">
+        <v-col cols="12" sm="2" order="2" class="hidden-sm-and-down" />
+        <v-col cols="12" sm="8" order="3">
             <v-sheet class="mb-4 pa-2" v-if="answer !== null">
                 <v-card color="accent" class="ma-2" elevation="2">
                     <v-card-subtitle class="pb-0">
@@ -66,7 +66,9 @@
                 </div>
             </v-sheet>
         </v-col>
-        <v-col cols="12" sm="2" />
+        <v-col cols="12" sm="2" order="1" order-md="4">
+            <UserInfo />
+        </v-col>
     </v-row>
 </v-container>
 </template>
@@ -88,7 +90,7 @@ export default class AnswerPage extends Vue {
         const a = this.answer; // typescript linter does a big mad if I don't do this
         return a.questions.filter(q => q.id === a.bestquestion)[0];
     }
-    get canAsk() { return this.answer.closed === null && this.$store.state.userInfo.blockdate !== null && this.answer?.yours === false; }
+    get canAsk() { return this.answer?.closed === null && this.$store.state.userInfo.blockdate === null && this.answer?.yours === false; }
     created() {
         const id = this.$route.params.id;
         if(id === "" || id === undefined) {
