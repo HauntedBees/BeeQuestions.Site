@@ -1,7 +1,7 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
 import createPersistedState from 'vuex-persistedstate';
-import { LoginResponseModel, UserInfoModel } from 'src/models/AuthModel';
+import { LoginResponseModel, UserInfoModel, RefreshedUserInfoModel } from 'src/models/AuthModel';
 Vue.use(Vuex);
 export default new Vuex.Store({
   state: {
@@ -49,6 +49,15 @@ export default new Vuex.Store({
       state.userInfo = new UserInfoModel();
       state.auth = false;
       state.token = "";
+    },
+    updateStats(state, userInfo:RefreshedUserInfoModel) {
+      if(userInfo.notLoggedIn || !state.auth) { return; }
+      state.userInfo.score = userInfo.score;
+      state.userInfo.level = userInfo.level;
+      state.userInfo.questionsPerDay = userInfo.questionsPerDay;
+      state.userInfo.answersPerDay = userInfo.answersPerDay;
+      state.userInfo.questionsAsked = userInfo.questionsAsked;
+      state.userInfo.answersGiven = userInfo.answersGiven;
     }
   }
 })

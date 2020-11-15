@@ -83,6 +83,7 @@
 <script lang="ts">
 import { Vue, Component, Watch } from 'vue-property-decorator';
 import { bee, BeeResponse } from 'src/util/webmethod';
+import { RefreshedUserInfoModel } from 'src/models/AuthModel';
 @Component
 export default class HomePage extends Vue {
     showUserInfoMobile:number|undefined;
@@ -114,7 +115,25 @@ export default class HomePage extends Vue {
                 return false;
         }
     }
-    created() { this.DoTagSearch(); }
+
+    componentDestroyed = false;
+    refreshIdx = 0;
+    RefreshUserInfo() {
+        if(!this.$store.state.auth) { return; }
+        window.clearTimeout(this.refreshIdx);
+        if(!document.hasFocus()) {
+            this.refreshIdx = window.setTimeout(() => this.RefreshUserInfo(), 300000);
+            return;
+        }
+        bee.get(null, "UpdatedStats", [], (data:BeeResponse<RefreshedUserInfoModel>) => {
+            this.$store.commit("updateStats", data.result);
+            if(!this.$store.state.auth || this.componentDestroyed) { return; }
+            this.refreshIdx = window.setTimeout(() => this.RefreshUserInfo(), 60000);
+        });
+    }
+    destroyed() { this.componentDestroyed = true; window.clearTimeout(this.refreshIdx); }
+
+    created() { this.DoTagSearch(); this.RefreshUserInfo(); }
     delayIdx = 0;
     @Watch("tagSearch")
     searchChanged(value:string|null) {
