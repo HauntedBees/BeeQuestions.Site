@@ -18,17 +18,13 @@
                     </div>
                 </v-row>
                 <div>
-                    <v-row class="mt-2">
-                        <v-col class="text-caption pb-0 pt-1" v-if="userInfo !== null">
+                    <v-row class="mt-2" v-if="userInfo !== null">
+                        <v-col cols="12" sm="4" class="text-caption pb-0 pt-1">
                             <strong>{{$t("bestQuestions")}}:</strong>
                             {{userInfo.bestQuestions}} ({{$filters.percent(userInfo.bestQuestions / userInfo.questions)}})
                         </v-col>
-                    </v-row>
-                    <v-row>
-                        <v-col cols="12" sm="3" class="text-caption pb-0 pt-1"><strong>{{$t("totalAnswers")}}:</strong> {{userInfo.answers}}</v-col>
-                        <v-col cols="12" sm="3" class="text-caption pb-0 pt-1"><strong>{{$t("totalQuestions")}}:</strong> {{userInfo.questions}}</v-col>
-                        <v-col cols="12" sm="3" class="text-caption pb-0 pt-1"><strong>{{$t("answersSaved")}}:</strong> {{userInfo.answerLikes}}</v-col>
-                        <v-col cols="12" sm="3" class="text-caption pb-0 pt-1"><strong>{{$t("questionsLiked")}}:</strong> {{userInfo.questionLikes}}</v-col>
+                        <v-col cols="12" sm="4" class="text-caption pb-0 pt-1"><strong>{{$t("totalAnswers")}}:</strong> {{userInfo.answers}}</v-col>
+                        <v-col cols="12" sm="4" class="text-caption pb-0 pt-1"><strong>{{$t("totalQuestions")}}:</strong> {{userInfo.questions}}</v-col>
                     </v-row>
                 </div>
             </v-sheet>
