@@ -28,7 +28,7 @@
                 </p>
                 <p>
                     Additional Code and Asset Credits:
-                    <ol style="list-style-type:disc" class="ml-12">
+                    <ol style="list-style-type:disc" class="ml-lg-12">
                         <li v-for="a in attributions" :key="a.name"><attr :name="a.name" :nameURL="a.nameURL" :by="a.by" :byURL="a.byURL" :license="a.license" :secondlicense="a.license2" /></li>
                     </ol>
                 </p>

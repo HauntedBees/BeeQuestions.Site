@@ -17,6 +17,7 @@ import OAuthPage from "src/views/OAuthPage.vue";
 Vue.use(VueRouter);
 const routes:Array<RouteConfig> = [
     { path: "/", component: HomePage, meta: { title: "Bee Questions!" } },
+    { path: "/index.html", component: HomePage, meta: { title: "Bee Questions!" } },
     { path: "/admin", component: AdminPage, meta: { title: "Bee Questions! - Admin Section" } },
 
     { path: "/login", component: LoginPage, meta: { title: "Bee Questions! - Log In" } },
@@ -34,7 +35,7 @@ const routes:Array<RouteConfig> = [
     { path: "/tag/:tag", component: TagPage }
 ]
 
-const router = new VueRouter({ mode: "history", base: process.env.BASE_URL, routes });
+const router = new VueRouter({ mode: "history", base: process.env.BASE_URL, routes, scrollBehavior() { return { x: 0, y: 0 }; } });
 router.afterEach(to => {
     Vue.nextTick(() => {
         if(to.meta.title) { document.title = to.meta.title; }

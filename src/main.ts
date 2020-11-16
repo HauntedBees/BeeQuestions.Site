@@ -14,7 +14,7 @@ dayjs.extend(localizedFormat);
 Object.defineProperty(Vue.prototype, "$dayjs", { value: dayjs });
 Object.defineProperty(Vue.prototype, "$filters", { value: {
 	titlecase(str:string) { return str.split(" ").map(w => w[0].toLocaleUpperCase() + w.slice(1)).join(" "); },
-	percent(num:number) { return (num * 100).toFixed(0) + "%"; }
+	percent(num:number) { return isNaN(num) ? "N/A%" : (num * 100).toFixed(0) + "%"; }
 } });
 Vue.config.productionTip = false;
 new Vue({

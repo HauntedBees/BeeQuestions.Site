@@ -16,7 +16,7 @@
                     <div v-if="answers.length === 0" class="pt-16 text-center">
                         <i18n path="notag">
                             <span>{{titletag}}</span>
-                            <router-link to="/answers/new">{{$t("notaglink")}}</router-link>
+                            <a @click="NewAnswer">{{$t("notaglink")}}</a>
                         </i18n>
                     </div>
                     <LoadMore v-if="answers.length > 0" @loadmore="Paginate" :reachedEnd="endOfList" />
@@ -59,6 +59,13 @@ export default class TagPage extends Loadable {
         const response = await bee.getStandardValue(null, "TagAnswers", [this.tag, this.tab, newPage]);
         this.endOfList = response.length === 0;
         this.answers.push(...response);
+    }
+    NewAnswer() {
+        if(this.$store.state.auth) {
+            document.getElementById("answerBtn")?.click();
+        } else {
+            this.$router.push("/login");
+        }
     }
 }
 </script>

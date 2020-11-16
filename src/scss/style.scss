@@ -11,6 +11,7 @@ ul {
 .v-slide-group__prev { display: none!important }
 p { text-indent: 2em }
 p.text-sm-body-2 { text-indent: 1em }
+p >ol { text-indent: 0 }
 
 .on-hover { opacity: 0.8; cursor: pointer }
 

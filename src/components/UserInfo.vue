@@ -34,7 +34,7 @@
                     <v-row class="ml-1">
                         <v-dialog v-model="showAnswerDialog" width="640">
                             <template v-slot:activator="{ on, attrs }">
-                                <v-btn v-bind="attrs" v-on="on" color="primary" @click.stop="GiveAnswer" class="mx-auto">Give an Answer</v-btn>
+                                <v-btn id="answerBtn" v-bind="attrs" v-on="on" color="primary" @click.stop="GiveAnswer" class="mx-auto">Give an Answer</v-btn>
                             </template>
                             <v-card style="border: 1px solid white">
                                 <v-card-title>{{$t("giveanswer")}}</v-card-title>
@@ -155,7 +155,7 @@ export default class HomePage extends Vue {
     async DoTagSearch() {
         if(this.tagSearch === null) { return; }
         this.tagList = await bee.getStandardValue(this, "AutocompleteTags", [this.tagSearch]);
-        if(this.$store.state.userInfo.level >= 3 && this.tagSearch.length >= 3) {
+        if(this.$store.state.userInfo.level >= 3 && this.tagSearch !== null && this.tagSearch.length >= 3) {
             this.tagList.push(this.tagSearch.substring(0, 15));
         }
     }
