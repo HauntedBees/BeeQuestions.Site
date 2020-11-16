@@ -51,7 +51,10 @@ export default class AboutPage extends Vue {
         { name: "vuex-persistedstate", nameURL: "https://www.npmjs.com/package/vuex-persistedstate", by: "Robin van der Vleuten", byURL: "https://github.com/robinvdvleuten", license: "MIT" },
         { name: "core-js", nameURL: "https://www.npmjs.com/package/core-js", by: "Denis Pushkarev", byURL: "https://github.com/zloirock", license: "MIT" },
         { name: "Day.js", nameURL: "https://day.js.org/", by: "iamkun", byURL: "https://github.com/iamkun", license: "MIT" },
-        { name: "Twemoji", nameURL: "https://twemoji.twitter.com/", by: "Twitter", byURL: "https://github.com/twitter", license: "CC-BY 4.0", license2: "MIT" }
+        { name: "Twemoji", nameURL: "https://twemoji.twitter.com/", by: "Twitter", byURL: "https://github.com/twitter", license: "CC-BY 4.0", license2: "MIT" },
+        { name: "Nevis", nameURL: "https://www.fontspace.com/nevis-font-f14902", by: "Ten by Twenty", byURL: "http://tenbytwenty.com/", license: "SIL Open Font" },
+        { name: "Roboto", nameURL: "https://fonts.google.com/specimen/Roboto", by: "Christian Robertson", byURL: "http://christianrobertson.com/", license: "Apache 2.0" },
+        { name: "Material Design Icons", nameURL: "https://materialdesignicons.com/", by: "Austin Andrews", byURL: "https://github.com/Templarian", license: "Apache 2.0" }
     ];
 }
 </script>
