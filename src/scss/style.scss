@@ -1,4 +1,4 @@
-@font-face { font-family: "Nevis"; src: url("../fonts/nevis2.ttf") }
+@font-face { font-family: "Nevis"; src: url("/common/fonts/nevis2.ttf") }
 em { font-family: "Nevis"; font-style: normal; font-size: 1.3rem; }
 @for $i from 1 through 6 {
     h#{$i} { font-family: "Nevis" }
