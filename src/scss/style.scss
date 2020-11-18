@@ -19,3 +19,5 @@ $sizes: 16px, 32px, 48px, 64px, 76px;
 @each $size in $sizes {
     .e-size#{$size} img { width: $size !important; height: $size !important }
 }
+
+.v-card__title { word-break: break-word!important }
