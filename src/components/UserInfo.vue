@@ -34,7 +34,12 @@
                     <v-row class="ml-1">
                         <v-dialog v-model="showAnswerDialog" width="640">
                             <template v-slot:activator="{ on, attrs }">
-                                <v-btn id="answerBtn" v-bind="attrs" v-on="on" color="primary" @click.stop="GiveAnswer" class="mx-auto">Give an Answer</v-btn>
+                                <v-btn id="answerBtn"
+                                    v-bind="attrs" v-on="on"
+                                    color="primary" @click.stop="GiveAnswer" class="mx-auto"
+                                    :disabled="($store.state.userInfo.answersPerDay - $store.state.userInfo.answersGiven) <= 0">
+                                    Give an Answer
+                                </v-btn>
                             </template>
                             <v-card style="border: 1px solid white">
                                 <v-card-title>{{$t("giveanswer")}}</v-card-title>
@@ -58,7 +63,7 @@
                                 <v-card-actions>
                                     <v-spacer/>
                                     <v-btn color="secondary" text class="ml-5" @click="showAnswerDialog=false">{{$t("cancelbutton")}}</v-btn>
-                                    <LoadableButton color="primary" textkey="submit" :valid="myAnswer.length > 0 && tagSelection.length > 0" @submit="PostAnswer"/>
+                                    <LoadableButton :disabled="($store.state.userInfo.answersPerDay - $store.state.userInfo.answersGiven) <= 0" color="primary" textkey="submit" :valid="myAnswer.length > 0 && tagSelection.length > 0" @submit="PostAnswer"/>
                                 </v-card-actions>
                             </v-card>
                         </v-dialog>
