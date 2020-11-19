@@ -25,6 +25,9 @@
                     <v-list-item to="/settings">
                         <v-list-item-title>{{$t("settings")}}</v-list-item-title>
                     </v-list-item>
+                    <v-list-item v-if="$store.state.userInfo.admin" to="/admin">
+                        <v-list-item-title>{{$t("admin")}}</v-list-item-title>
+                    </v-list-item>
                     <v-list-item @click="$store.commit('logout')">
                         <v-list-item-title>{{$t("logout")}}</v-list-item-title>
                     </v-list-item>

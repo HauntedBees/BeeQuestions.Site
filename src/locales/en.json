@@ -15,6 +15,7 @@
 	"plzpasswordmatch": "Passwords must match.",
 
 	"settings": "Profile",
+	"admin": "Admin",
 	"logout": "Log Out",
 
 	"oauthredirect": "Please wait one moment while you are redirected back to the site.",

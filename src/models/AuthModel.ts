@@ -1,4 +1,5 @@
 export class UserInfoModel {
+    admin = false;
     displayname = "";
     joined = "";
     lastlogin = "";
