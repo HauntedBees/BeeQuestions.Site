@@ -1,6 +1,6 @@
 <template>
 <v-sheet shaped class="pa-5">
-    <div v-if="!$store.state.auth" class="align-center">
+    <div v-if="!authorized" class="align-center">
         <v-img alt="Bee Questions! Logo" class="shrink mx-auto" contain :src="require('../assets/logo.png')" transition="scale-transition" width="40" />
         <p class="text-sm-body-2">
             Welcome to Bee Questions, the world's first A&amp;Q site! If this is your first time here, click around, read the <router-link to="/about">about page</router-link>,
@@ -11,13 +11,13 @@
             ever been to. And if it is, wow, congratulations. Welcome to the internet. I'm honored.
         </p>
     </div>
-    <v-expansion-panels v-if="$store.state.auth" flat :value="showUserInfo">
+    <v-expansion-panels v-if="authorized" flat :value="showUserInfo">
         <v-expansion-panel>
             <v-expansion-panel-header class="ma-0 pa-0" :hide-actions="hideExpandIcon" :disabled="hideExpandIcon">
                 <v-container class="pa-0">
                     <v-row>
                         <v-col cols="3">
-                            <v-badge overlap :content="$store.state.userInfo.totalunread" :value="$store.state.userInfo.notifications.length > 0">
+                            <v-badge overlap :content="$store.state.userInfo.totalunread" :value="$store.state.userInfo.totalunread > 0">
                                 <UserAvatar :settings="true" :color="$store.state.userInfo.color" :emoji="$store.state.userInfo.emoji" />
                             </v-badge>
                         </v-col>
@@ -84,9 +84,9 @@
                         <div>
                             <Notification v-for="notification in $store.state.userInfo.notifications" :homescreen="true" :key="notification.id" :notification="notification" />
                         </div>
-                        <div class="text-caption text-right mb-2" v-if="($store.state.userInfo.totalunread - $store.state.userInfo.notifications.length) > 0">
+                        <div class="text-caption text-right mb-2" v-if="($store.state.userInfo.totalunread - notificationCount) > 0">
                             <i18n path="andXMore">
-                                {{$store.state.userInfo.totalunread - $store.state.userInfo.notifications.length}}
+                                {{$store.state.userInfo.totalunread - notificationCount}}
                             </i18n>
                         </div>
                     </div>
@@ -112,6 +112,11 @@ export default class HomePage extends Vue {
     tagList:string[] = [];
     loading = false;
     selectedCount() { return this.tagSelection.length; }
+    get notificationCount() { 
+        if(!this.$store.state.userInfo || !this.$store.state.userInfo.notifications) { return 0; }
+        return this.$store.state.userInfo.notifications.length;
+    }
+    get authorized() { return this.$store.state.auth; }
     get showUserInfo() {
         switch(this.$vuetify.breakpoint.name) {
             case "xl":
