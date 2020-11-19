@@ -7,7 +7,7 @@
 			<div>
 				<v-card-title v-if="!showAnswer">{{question.question}}</v-card-title>
 				<v-card-title v-if="showAnswer" class="pb-0">Q: {{question.question}}</v-card-title>
-				<v-card-title v-if="showAnswer" class="pt-0 mx-5 subtitle-1">A: {{question.answer}}</v-card-title>
+				<v-card-title v-if="showAnswer" class="pt-0 mx-4 text-body-1">A: {{question.answer}}</v-card-title>
 			</div>
 			<v-spacer />
 			<div>
