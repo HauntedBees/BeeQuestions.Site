@@ -4,7 +4,7 @@
         <v-col cols="12" sm="2" class="hidden-sm-and-down" />
         <v-col cols="12" sm="8">
             <v-sheet class="mb-4 pa-2 text-left px-4">
-                <h1>Bee Questions v1.9 - What This Is?</h1>
+                <h1>Bee Questions v1.92 - What This Is?</h1>
                 <p>
                     Lots of websites let you ask questions and get answers. That's pretty helpful. Sometimes it's even funny. But not always. That's where <strong>Bee Questions</strong>
                     comes in. Users post words or phrases that are probably the answer to multiple questions. Then everyone else tries to figure out what those questions are.
@@ -19,7 +19,9 @@
                 </p>
                 <p>
                     Also this site isn't for children because it says bad words like "damn" and "barf" and also because explicitly clarifying that children should not use this 
-                    website will make the lawyers happier and The Man less likely to put his boot down on us.</p>
+                    website will make the lawyers happier and The Man less likely to put his boot down on us. Learn more in the <router-link to="/privacypolicy">Privacy Policy</router-link> 
+                    if that's the sort of thing you want to know more about.</p>
+                    
                 <h2>License and Credits</h2>
                 <p>
                     <strong>Bee Questions</strong> was created by <a href="https://www.hauntedbees.com" target="_blank">Haunted Bees Productions</a> and is licensed under 
