@@ -25,13 +25,12 @@ import Component from 'vue-class-component';
 import { Prop } from 'vue-property-decorator';
 import { bee } from 'src/util/webmethod';
 import { Loadable } from 'src/util/Loadable';
-//import twemoji from 'twemoji';
 class Emoji {
-    codepoint:string;// twemoji:string;
-    constructor(e:string) { this.codepoint = e; }//this.twemoji = twemoji.convert.fromCodePoint(e); }
+    codepoint:string;
+    constructor(e:string) { this.codepoint = e; }
 }
 @Component
-export default class TwemojiSelector extends Vue {
+export default class EmojiSelector extends Vue {
     tab = 0;
     @Prop() emoji:string|undefined;
     @Prop() color:string|undefined;
@@ -62,10 +61,6 @@ export default class TwemojiSelector extends Vue {
     mounted() {
         this.baseEmoji = new Emoji(this.emoji || "1F9CB");
         this.currentColor = this.color || "#0000FF";
-        //this.RefreshTwemojis();
     }
-    /*private RefreshTwemojis() {
-        twemoji.parse((this.$refs.emojiset as HTMLElement));
-    }*/
 }
 </script>

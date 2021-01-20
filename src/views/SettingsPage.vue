@@ -13,7 +13,7 @@
                     </v-hover>
                 </v-row>
                 <v-row v-if="editingEmoji!==''">
-                    <TwemojiSelector :color="editingColor" :emoji="editingEmoji" @finish="EndProfileEmoji" />
+                    <EmojiSelector :color="editingColor" :emoji="editingEmoji" @finish="EndProfileEmoji" />
                 </v-row>
                 <v-row class="mt-2">
                     <div class="mx-auto">
