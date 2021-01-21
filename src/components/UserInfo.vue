@@ -32,14 +32,14 @@
                         </v-col>
                     </v-row>
                     <v-row class="ml-1">
-                        <v-col>
+                        <v-col class="text-center">
                             <v-dialog v-model="showAnswerDialog" width="640">
                                 <template v-slot:activator="{ on, attrs }">
                                     <v-btn id="answerBtn"
                                         v-bind="attrs" v-on="on"
                                         color="primary" @click.stop="GiveAnswer" class="mx-auto"
                                         :disabled="($store.state.userInfo.answersPerDay - $store.state.userInfo.answersGiven) <= 0">
-                                        Give an Answer
+                                        {{$t("giveanswer")}}
                                     </v-btn>
                                 </template>
                                 <v-card style="border: 1px solid white">
