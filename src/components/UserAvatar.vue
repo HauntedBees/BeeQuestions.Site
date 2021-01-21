@@ -11,7 +11,7 @@
 <script lang="ts">
 import { Vue, Component, Prop } from 'vue-property-decorator';
 @Component
-export default class ListQuestion extends Vue {
+export default class UserAvatar extends Vue {
     @Prop() readonly css:string | undefined;
     @Prop() readonly emoji:string | undefined;
     @Prop() readonly color:string | undefined;

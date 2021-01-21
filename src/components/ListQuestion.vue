@@ -1,5 +1,5 @@
 <template>
-	<v-card :color="bgcolor" class="ma-2" :shaped="question.winner" :to="showAnswer ? ('answer/' + question.answerURL) : ''">
+	<v-card :color="bgcolor" class="ma-2 mt-5 mb-4" :shaped="question.winner" :to="showAnswer ? ('/answer/' + question.answerURL) : ''">
 		<v-row class="pl-4">
 			<div class="text-center pa-2" v-if="question.winner">
 				<v-icon style="font-size:64px">mdi-trophy-award</v-icon>
@@ -10,8 +10,8 @@
 				<v-card-title v-if="showAnswer" class="pt-0 mx-4 text-body-1">A: {{question.answer}}</v-card-title>
 			</div>
 			<v-spacer />
-			<div>
-				<UserAvatar css="mr-8 mt-4" :displayname="question.author" :color="question.authorcolor" :emoji="question.authoremoji" />
+			<div v-if="question.authoremoji">
+				<UserAvatar css="mr-8 my-4" :displayname="question.author" :color="question.authorcolor" :emoji="question.authoremoji" />
 			</div>
 		</v-row>
 		<v-row align="center" justify="end" class="mr-2" v-if="$store.state.auth">

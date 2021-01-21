@@ -26,7 +26,7 @@
                 <p>
                     <strong>Bee Questions</strong> was created by <a href="https://www.hauntedbees.com" target="_blank">Haunted Bees Productions</a> and is licensed under 
                     the <ax href="https://www.gnu.org/licenses/agpl-3.0.en.html">GNU AGPL v3 License</ax>, meaning all its source code is freely available on 
-                    <ax href="https://github.com/HauntedBees/">GitHub</ax>. Original idea by <ax href="https://twitter.com/SrRandon">Steven Ramsey</ax>.
+                    <ax href="https://github.com/HauntedBees/BeeQuestions.Site">GitHub</ax>. Original idea by <ax href="https://twitter.com/SrRandon">Steven Ramsey</ax>.
                 </p>
                 <p>
                     Additional Code and Asset Credits:

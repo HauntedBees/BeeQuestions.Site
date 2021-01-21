@@ -5,9 +5,13 @@
         <v-col cols="12" sm="8" order="3">
             <Loader v-if="loading" />
             <v-sheet v-if="userInfo !== null" class="mb-4 pa-2 px-4 text-center">
-                <v-row><v-avatar class="mx-auto" size="48" :color="userInfo.color"><emoji class="pt-1" :emoji="userInfo.emoji"/></v-avatar></v-row>
+                <v-row>
+                    <v-col>
+                        <v-avatar class="mx-auto" size="48" :color="userInfo.color"><emoji class="pt-1" :emoji="userInfo.emoji" /></v-avatar>
+                    </v-col>
+                </v-row>
                 <v-row class="mt-2">
-                    <div class="mx-auto">
+                    <v-col class="mx-auto">
                         <div class="pb-3">
                             <h1>{{userInfo.displayname}}</h1>
                         </div>
@@ -28,16 +32,16 @@
                                 </v-col>
                             </v-row>
                         </div>
-                    </div>
+                    </v-col>
                 </v-row>
                 <div>
-                    <v-row class="mt-2" v-if="userInfo !== null">
-                        <v-col cols="12" sm="4" class="text-caption pb-0 pt-1">
+                    <v-row class="mt-3 mb-0" v-if="userInfo !== null">
+                        <v-col cols="12" md="4" class="text-caption pb-0 pt-1">
                             <strong>{{$t("bestQuestions")}}:</strong>
                             {{userInfo.bestQuestions}} ({{$filters.percent(userInfo.bestQuestions / userInfo.questions)}})
                         </v-col>
-                        <v-col cols="12" sm="4" class="text-caption pb-0 pt-1"><strong>{{$t("totalAnswers")}}:</strong> {{userInfo.answers}}</v-col>
-                        <v-col cols="12" sm="4" class="text-caption pb-0 pt-1"><strong>{{$t("totalQuestions")}}:</strong> {{userInfo.questions}}</v-col>
+                        <v-col cols="12" md="4" class="text-caption pb-0 pt-1"><strong>{{$t("totalAnswers")}}:</strong> {{userInfo.answers}}</v-col>
+                        <v-col cols="12" md="4" class="text-caption pb-0 pt-1"><strong>{{$t("totalQuestions")}}:</strong> {{userInfo.questions}}</v-col>
                     </v-row>
                 </div>
             </v-sheet>

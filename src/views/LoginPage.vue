@@ -20,24 +20,28 @@
                         required />
                     <v-container>
                         <v-row class="mb-2">
-                            <v-btn color="secondary" class="mr-4" to="/signup">{{$t("signup")}}</v-btn>
-                            <v-spacer />
-                            <v-tooltip top :disabled="valid">
-                                <template v-slot:activator="{on,attrs}">
-                                    <span v-on="on" v-bind="attrs">
-                                        <LoadableButton color="accent" textkey="login" :valid="valid" @submit="login"/>
-                                    </span>
-                                </template>
-                                <span>{{$t("login_please")}}</span>
-                            </v-tooltip>
+                            <v-col>
+                                <v-btn color="secondary" class="mr-4" to="/signup">{{$t("signup")}}</v-btn>
+                            </v-col>
+                            <v-col class="text-right">
+                                <v-tooltip top :disabled="valid">
+                                    <template v-slot:activator="{on,attrs}">
+                                        <span v-on="on" v-bind="attrs">
+                                            <LoadableButton color="accent" textkey="login" :valid="valid" @submit="login"/>
+                                        </span>
+                                    </template>
+                                    <span>{{$t("login_please")}}</span>
+                                </v-tooltip>
+                            </v-col>
                         </v-row>
                         <v-row>
-                            <v-spacer />
-                            <v-btn color="secondary" class="mr-4" @click="SignInWithTwitter">
-                                <v-icon>mdi-twitter</v-icon>
-                                <v-divider class="mx-2" vertical />
-                                Sign in with Twitter
-                            </v-btn>
+                            <v-col class="text-right">
+                                <v-btn color="secondary" class="mr-4" @click="SignInWithTwitter">
+                                    <v-icon>mdi-twitter</v-icon>
+                                    <v-divider class="mx-2" vertical />
+                                    Sign in with Twitter
+                                </v-btn>
+                            </v-col>
                         </v-row>
                     </v-container>
                 </v-form>
