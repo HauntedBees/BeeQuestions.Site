@@ -1,22 +1,24 @@
 <template>
 <v-container>
     <v-row>
-        <v-col cols="12" sm="2" class="hidden-sm-and-down" />
-        <v-col v-if="$store.state.auth" cols="12" sm="8">
+        <v-col cols="12" md="2" class="hidden-sm-and-down" />
+        <v-col v-if="$store.state.auth" cols="12" md="8">
             <v-sheet class="mb-4 pa-2 px-4 text-center">
                 <v-row v-if="editingEmoji===''">
-                    <v-hover v-slot="{hover}">
-                        <v-avatar @click="EditProfileEmoji" class="mx-auto" v-class.on-hover="hover" size="48" :color="$store.state.userInfo.color">
-                            <emoji class="pt-1" :emoji="$store.state.userInfo.emoji"/>
-                            <v-icon v-if="hover" style="position:absolute;top:0;left:0">mdi-pencil</v-icon>
-                        </v-avatar>
-                    </v-hover>
+                    <v-col>
+                        <v-hover v-slot="{hover}">
+                            <v-avatar @click="EditProfileEmoji" class="mx-auto" v-class.on-hover="hover" size="48" :color="$store.state.userInfo.color">
+                                <emoji class="pt-1" :emoji="$store.state.userInfo.emoji"/>
+                                <v-icon v-if="hover" style="position:absolute;top:0;left:0">mdi-pencil</v-icon>
+                            </v-avatar>
+                        </v-hover>
+                    </v-col>
                 </v-row>
                 <v-row v-if="editingEmoji!==''">
                     <EmojiSelector :color="editingColor" :emoji="editingEmoji" @finish="EndProfileEmoji" />
                 </v-row>
                 <v-row class="mt-2">
-                    <div class="mx-auto">
+                    <v-col class="mx-auto">
                         <div class="pb-3" v-if="editDisplayName">
                             <v-text-field v-model="displayname" maxlength="20" counter="20" :label="$t('newdisplayname')"></v-text-field>
                             <div>
@@ -45,25 +47,25 @@
                                 </v-col>
                             </v-row>
                         </div>
-                    </div>
+                    </v-col>
                 </v-row>
                 <div>
                     <v-row class="my-2" v-if="$store.state.userInfo.blockdate !== null">
                         <v-col class="font-weight-black">Blocked from posting for {{$dayjs($store.state.userInfo.blockdate).fromNow(true)}}</v-col>
                     </v-row>
-                    <v-row class="mt-2">
-                        <v-col cols="12" sm="4" class="text-caption pb-0 pt-1"><strong>{{$t("remainingAnswers")}}:</strong> {{$store.state.userInfo.answersPerDay - $store.state.userInfo.answersGiven}}</v-col>
-                        <v-col cols="12" sm="4" class="text-caption pb-0 pt-1"><strong>{{$t("remainingQuestions")}}:</strong> {{$store.state.userInfo.questionsPerDay - $store.state.userInfo.questionsAsked}}</v-col>
-                        <v-col cols="12" sm="4" class="text-caption pb-0 pt-1" v-if="additionalInfo !== null">
+                    <v-row class="my-2">
+                        <v-col cols="12" md="4" class="text-caption pb-0 pt-1"><strong>{{$t("remainingAnswers")}}:</strong> {{$store.state.userInfo.answersPerDay - $store.state.userInfo.answersGiven}}</v-col>
+                        <v-col cols="12" md="4" class="text-caption pb-0 pt-1"><strong>{{$t("remainingQuestions")}}:</strong> {{$store.state.userInfo.questionsPerDay - $store.state.userInfo.questionsAsked}}</v-col>
+                        <v-col cols="12" md="4" class="text-caption pb-0 pt-1" v-if="additionalInfo !== null">
                             <strong>{{$t("bestQuestions")}}:</strong>
                             {{additionalInfo.bestQuestions}} ({{$filters.percent(additionalInfo.bestQuestions / additionalInfo.questions)}})
                         </v-col>
                     </v-row>
-                    <v-row v-if="additionalInfo !== null">
-                        <v-col cols="12" sm="3" class="text-caption pb-0 pt-1"><strong>{{$t("totalAnswers")}}:</strong> {{additionalInfo.answers}}</v-col>
-                        <v-col cols="12" sm="3" class="text-caption pb-0 pt-1"><strong>{{$t("totalQuestions")}}:</strong> {{additionalInfo.questions}}</v-col>
-                        <v-col cols="12" sm="3" class="text-caption pb-0 pt-1"><strong>{{$t("answersSaved")}}:</strong> {{additionalInfo.answerLikes}}</v-col>
-                        <v-col cols="12" sm="3" class="text-caption pb-0 pt-1"><strong>{{$t("questionsLiked")}}:</strong> {{additionalInfo.questionLikes}}</v-col>
+                    <v-row class="mb-2" v-if="additionalInfo !== null">
+                        <v-col cols="12" md="3" class="text-caption pb-0 pt-1"><strong>{{$t("totalAnswers")}}:</strong> {{additionalInfo.answers}}</v-col>
+                        <v-col cols="12" md="3" class="text-caption pb-0 pt-1"><strong>{{$t("totalQuestions")}}:</strong> {{additionalInfo.questions}}</v-col>
+                        <v-col cols="12" md="3" class="text-caption pb-0 pt-1"><strong>{{$t("answersSaved")}}:</strong> {{additionalInfo.answerLikes}}</v-col>
+                        <v-col cols="12" md="3" class="text-caption pb-0 pt-1"><strong>{{$t("questionsLiked")}}:</strong> {{additionalInfo.questionLikes}}</v-col>
                     </v-row>
                 </div>
             </v-sheet>
