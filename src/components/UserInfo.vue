@@ -32,41 +32,43 @@
                         </v-col>
                     </v-row>
                     <v-row class="ml-1">
-                        <v-dialog v-model="showAnswerDialog" width="640">
-                            <template v-slot:activator="{ on, attrs }">
-                                <v-btn id="answerBtn"
-                                    v-bind="attrs" v-on="on"
-                                    color="primary" @click.stop="GiveAnswer" class="mx-auto"
-                                    :disabled="($store.state.userInfo.answersPerDay - $store.state.userInfo.answersGiven) <= 0">
-                                    Give an Answer
-                                </v-btn>
-                            </template>
-                            <v-card style="border: 1px solid white">
-                                <v-card-title>{{$t("giveanswer")}}</v-card-title>
-                                <v-card-text>
-                                    <p>{{$t("giveanswerdesc")}}</p>
-                                    <v-textarea
-                                        outlined
-                                        :label="$t('giveanswertextarea')"
-                                        v-model="myAnswer"
-                                        maxlength="500"
-                                        counter="500" />
-                                    <v-autocomplete
-                                        v-model="tagSelection" @input="TagChange" multiple
-                                        :loading="loading" :items="tagList" :search-input.sync="tagSearch" :menu-props="tagMenuProps"
-                                        :counter="5" :counter-value="selectedCount" hide-selected hide-no-data
-                                        chips deletable-chips auto-select-first cache-items
-                                        :hint="$t($store.state.userInfo.level >= 3 ? 'taghint_high' : 'taghint_low')" persistent-hint
-                                        :label="$t('tagselectlabel')" />
-                                </v-card-text>
-                                <v-divider/>
-                                <v-card-actions>
-                                    <v-spacer/>
-                                    <v-btn color="secondary" text class="ml-5" @click="showAnswerDialog=false">{{$t("cancelbutton")}}</v-btn>
-                                    <LoadableButton :disabled="($store.state.userInfo.answersPerDay - $store.state.userInfo.answersGiven) <= 0" color="primary" textkey="submit" :valid="myAnswer.length > 0 && tagSelection.length > 0" @submit="PostAnswer"/>
-                                </v-card-actions>
-                            </v-card>
-                        </v-dialog>
+                        <v-col>
+                            <v-dialog v-model="showAnswerDialog" width="640">
+                                <template v-slot:activator="{ on, attrs }">
+                                    <v-btn id="answerBtn"
+                                        v-bind="attrs" v-on="on"
+                                        color="primary" @click.stop="GiveAnswer" class="mx-auto"
+                                        :disabled="($store.state.userInfo.answersPerDay - $store.state.userInfo.answersGiven) <= 0">
+                                        Give an Answer
+                                    </v-btn>
+                                </template>
+                                <v-card style="border: 1px solid white">
+                                    <v-card-title>{{$t("giveanswer")}}</v-card-title>
+                                    <v-card-text>
+                                        <p>{{$t("giveanswerdesc")}}</p>
+                                        <v-textarea
+                                            outlined
+                                            :label="$t('giveanswertextarea')"
+                                            v-model="myAnswer"
+                                            maxlength="500"
+                                            counter="500" />
+                                        <v-autocomplete
+                                            v-model="tagSelection" @input="TagChange" multiple
+                                            :loading="loading" :items="tagList" :search-input.sync="tagSearch" :menu-props="tagMenuProps"
+                                            :counter="5" :counter-value="selectedCount" hide-selected hide-no-data
+                                            chips deletable-chips auto-select-first cache-items
+                                            :hint="$t($store.state.userInfo.level >= 3 ? 'taghint_high' : 'taghint_low')" persistent-hint
+                                            :label="$t('tagselectlabel')" />
+                                    </v-card-text>
+                                    <v-divider/>
+                                    <v-card-actions>
+                                        <v-spacer/>
+                                        <v-btn color="secondary" text class="ml-5" @click="showAnswerDialog=false">{{$t("cancelbutton")}}</v-btn>
+                                        <LoadableButton :disabled="($store.state.userInfo.answersPerDay - $store.state.userInfo.answersGiven) <= 0" color="primary" textkey="submit" :valid="myAnswer.length > 0 && tagSelection.length > 0" @submit="PostAnswer"/>
+                                    </v-card-actions>
+                                </v-card>
+                            </v-dialog>
+                        </v-col>
                     </v-row>
                 </v-container>
             </v-expansion-panel-header>
@@ -84,7 +86,7 @@
                         <div>
                             <Notification v-for="notification in $store.state.userInfo.notifications" :homescreen="true" :key="notification.id" :notification="notification" />
                         </div>
-                        <div class="text-caption text-right mb-2" v-if="($store.state.userInfo.totalunread - notificationCount) > 0">
+                        <div class="text-caption text-right mb-2" v-if="$store.state.userInfo.notifications && ($store.state.userInfo.totalunread - notificationCount) > 0">
                             <i18n path="andXMore">
                                 {{$store.state.userInfo.totalunread - notificationCount}}
                             </i18n>
