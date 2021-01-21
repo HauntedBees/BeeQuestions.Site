@@ -9,6 +9,7 @@
     "i18n:report": "vue-cli-service i18n:report --src './src/**/*.?(js|vue)' --locales './src/locales/**/*.json'"
   },
   "dependencies": {
+    "bee-vue-gang": "^0.1.2",
     "core-js": "^3.8.3",
     "dayjs": "^1.10.3",
     "vue": "^2.6.11",

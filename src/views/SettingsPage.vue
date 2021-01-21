@@ -6,7 +6,7 @@
             <v-sheet class="mb-4 pa-2 px-4 text-center">
                 <v-row v-if="editingEmoji===''">
                     <v-hover v-slot="{hover}">
-                        <v-avatar @click="EditProfileEmoji" :class="{ 'mx-auto': true, 'on-hover': hover }" size="48" :color="$store.state.userInfo.color">
+                        <v-avatar @click="EditProfileEmoji" class="mx-auto" v-class.on-hover="hover" size="48" :color="$store.state.userInfo.color">
                             <emoji class="pt-1" :emoji="$store.state.userInfo.emoji"/>
                             <v-icon v-if="hover" style="position:absolute;top:0;left:0">mdi-pencil</v-icon>
                         </v-avatar>
