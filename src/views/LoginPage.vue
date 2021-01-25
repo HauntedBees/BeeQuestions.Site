@@ -27,7 +27,7 @@
                                 <v-tooltip top :disabled="valid">
                                     <template v-slot:activator="{on,attrs}">
                                         <span v-on="on" v-bind="attrs">
-                                            <LoadableButton color="accent" textkey="login" :valid="valid" @submit="login"/>
+                                            <LoadableButton color="accent" :text="$t('login')" :loadtext="$t('login_loading')" :valid="valid" @submit="login"/>
                                         </span>
                                     </template>
                                     <span>{{$t("login_please")}}</span>

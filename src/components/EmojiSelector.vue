@@ -15,7 +15,7 @@
     </v-row>
     <v-row class="float-right">
         <v-btn color="secondary" class="mr-4" @click="CancelChanges">{{$t("cancel")}}</v-btn>
-        <LoadableButton color="accent" textkey="save" :valid="true" @submit="SaveChanges"/>
+        <LoadableButton color="accent" :text="$t('save')" :loadtext="$t('save_loading')" :valid="true" @submit="SaveChanges"/>
     </v-row>
 </v-container>
 </template>

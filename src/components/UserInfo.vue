@@ -64,7 +64,7 @@
                                     <v-card-actions>
                                         <v-spacer/>
                                         <v-btn color="secondary" text class="ml-5" @click="showAnswerDialog=false">{{$t("cancelbutton")}}</v-btn>
-                                        <LoadableButton :disabled="($store.state.userInfo.answersPerDay - $store.state.userInfo.answersGiven) <= 0" color="primary" textkey="submit" :valid="myAnswer.length > 0 && tagSelection.length > 0" @submit="PostAnswer"/>
+                                        <LoadableButton :disabled="($store.state.userInfo.answersPerDay - $store.state.userInfo.answersGiven) <= 0" color="primary" :text="$t('submit')" :loadtext="$t('submit_loading')" :valid="myAnswer.length > 0 && tagSelection.length > 0" @submit="PostAnswer"/>
                                     </v-card-actions>
                                 </v-card>
                             </v-dialog>

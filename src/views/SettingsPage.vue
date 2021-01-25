@@ -23,7 +23,7 @@
                             <v-text-field v-model="displayname" maxlength="20" counter="20" :label="$t('newdisplayname')"></v-text-field>
                             <div>
                                 <v-btn color="secondary" class="mr-4" @click="editDisplayName=false">{{$t("cancel")}}</v-btn>
-                                <LoadableButton color="accent" textkey="save" :valid="true" @submit="ChangeName"/>
+                                <LoadableButton color="accent" :text="$t('save')" :loadtext="$t('save_loading')" :valid="true" @submit="ChangeName"/>
                             </div>
                         </div>
                         <div class="pb-3" v-if="!editDisplayName">
@@ -134,7 +134,7 @@
                                     <v-card-actions>
                                         <v-spacer/>
                                         <v-btn color="secondary" class="mr-4" @click="showPasswordDialog=false">{{$t("cancel")}}</v-btn>
-                                        <LoadableButton color="accent" textkey="save" :valid="true" @submit="SavePasswordChange"/>
+                                        <LoadableButton color="accent" :text="$t('save')" :loadtext="$t('save_loading')" :valid="true" @submit="SavePasswordChange"/>
                                     </v-card-actions>
                                 </v-card>
                             </v-dialog>

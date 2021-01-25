@@ -1,11 +1,9 @@
 import Vue from "vue";
-import { Attribution, ExternalLink, Emoji, ClassDirective } from 'bee-vue-gang';
+import { Attribution, ExternalLink, Emoji, ClassDirective, LoadableButton, Loader } from 'bee-vue-gang';
 import GlobalSnackbar from "src/components/GlobalSnackbar.vue";
 import ListAnswer from "src/components/ListAnswer.vue";
 import ListQuestion from "src/components/ListQuestion.vue";
-import LoadableButton from "src/components/LoadableButton.vue";
 import LoadableTooltipIconButton from "src/components/LoadableTooltipIconButton.vue";
-import Loader from "src/components/Loader.vue";
 import LoadMore from "src/components/LoadMore.vue";
 import Notification from "src/components/Notification.vue";
 import TabList from "src/components/TabList.vue";

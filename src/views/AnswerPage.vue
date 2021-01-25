@@ -47,7 +47,7 @@
                         <v-card-actions class="align-right">
                             <v-spacer></v-spacer>
                             <v-btn color="secondary" text class="ml-5" @click="isAsking=false;myQuestion=''">{{$t("cancelbutton")}}</v-btn>
-                            <LoadableButton :disabled="!canAsk" color="primary" textkey="askbutton" :valid="myQuestion.length > 0" @submit="PostQuestion"/>
+                            <LoadableButton :disabled="!canAsk" color="primary" :text="$t('askbutton')" :loadtext="$t('askbutton_loading')" :valid="myQuestion.length > 0" @submit="PostQuestion"/>
                         </v-card-actions>
                     </v-card>
                 </div>
