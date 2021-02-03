@@ -1,1 +1,6 @@
-DirectoryIndex index.html
+RewriteEngine On
+RewriteBase /bq
+RewriteRule ^bq/index\.html$ - [L]
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule . /bq/index.html [L]
